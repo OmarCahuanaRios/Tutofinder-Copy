@@ -1,6 +1,5 @@
 package com.tutofinder.app.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,12 +22,10 @@ public class Membresia {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "docente_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Docente docentes;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tarjeta_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Tarjeta tarjeta;
 
     @Column(name = "fecha_expiracion", nullable = false)

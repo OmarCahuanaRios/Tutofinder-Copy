@@ -1,6 +1,4 @@
-package com.boot.bookingrestaurantapi.exceptions;
-
-import com.boot.bookingrestaurantapi.dtos.ErrorDto;
+package com.tutofinder.app.exception;
 
 import java.util.ArrayList;
 import java.util.List;

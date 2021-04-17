@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +17,7 @@ import java.util.List;
 @Data
 @Table(name = "alumnos")
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Alumno {
     @Id
@@ -36,8 +37,7 @@ public class Alumno {
     private String gradoEstudio;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value= {"handler", "hibernateLazyInitializer"})
-    @JoinColumn(name = "padre_id")
+    @JoinColumn(name = "padre_id",nullable = false)
     @NotNull(message = "Debe de haber un padre")
     private Padre padre;
 
@@ -59,38 +59,9 @@ public class Alumno {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 
-    public Alumno(){
-        this.tutorias =  new ArrayList<>();
-    }
-
     @PrePersist
     public void PrePersist() {
         this.createAt = new Date();
     }
 
-    public void setTutorias(List<Tutoria> tutorias) {
-        this.tutorias.clear();
-        tutorias.forEach(this::addTutoria);
-    }
-
-    public void addTutoria(Tutoria tutoria) {
-        this.tutorias.add(tutoria);
-        tutoria.setAlumno(this);
-    }
-    public void removeTutoria(Tutoria tutoria) {
-        this.tutorias.remove(tutoria);
-        tutoria.setAlumno(null);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Alumno)) {
-            return false;
-        }
-        Alumno p = (Alumno) obj;
-        return this.id != null && this.id.equals(p.getId());
-    }
 }

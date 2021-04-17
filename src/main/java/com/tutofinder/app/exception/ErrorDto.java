@@ -1,4 +1,4 @@
-package com.boot.bookingrestaurantapi.dtos;
+package com.tutofinder.app.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

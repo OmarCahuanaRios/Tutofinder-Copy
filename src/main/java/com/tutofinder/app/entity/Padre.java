@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +16,7 @@ import java.util.List;
 @Data
 @Table(name = "padres")
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Padre {
     @Id
@@ -43,43 +44,13 @@ public class Padre {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 
-
     @OneToMany(mappedBy = "padre", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"padre"}, allowSetters = true)
     private List<Alumno> alumnos;
-
-    public Padre(){
-        this.alumnos =  new ArrayList<>();
-    }
 
     @PrePersist
     public void PrePersist() {
         this.createAt = new Date();
     }
 
-    public void setAlumnos(List<Alumno> alumnos) {
-        this.alumnos.clear();
-        alumnos.forEach(this::addAlumno);
-    }
-
-    public void addAlumno(Alumno alumno) {
-        this.alumnos.add(alumno);
-        alumno.setPadre(this);
-    }
-    public void removeAlumno(Alumno alumno) {
-        this.alumnos.remove(alumno);
-        alumno.setPadre(null);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Padre)) {
-            return false;
-        }
-        Padre a = (Padre) obj;
-        return this.id != null && this.id.equals(a.getId());
-    }
 }

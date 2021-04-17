@@ -17,6 +17,7 @@ import java.util.List;
 @Data
 @Table(name = "docentes")
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Docente {
     @Id
@@ -55,40 +56,9 @@ public class Docente {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 
-    public Docente(){
-        this.tutorias =  new ArrayList<>();
-    }
-
     @PrePersist
     public void PrePersist() {
         this.createAt = new Date();
     }
-
-    public void setTutorias(List<Tutoria> tutorias) {
-        this.tutorias.clear();
-        tutorias.forEach(this::addTutoria);
-    }
-
-    public void addTutoria(Tutoria tutoria) {
-        this.tutorias.add(tutoria);
-        tutoria.setDocente(this);
-    }
-    public void removeTutoria(Tutoria tutoria) {
-        this.tutorias.remove(tutoria);
-        tutoria.setDocente(null);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Docente)) {
-            return false;
-        }
-        Docente a = (Docente) obj;
-        return this.id != null && this.id.equals(a.getId());
-    }
-
 
 }

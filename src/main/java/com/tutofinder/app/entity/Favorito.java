@@ -1,13 +1,11 @@
 package com.tutofinder.app.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -21,14 +19,10 @@ public class Favorito {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "padre_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    @NotNull(message = "Debe haber un padre al que asignar el docente como favorito")
+    @JoinColumn(name = "padre_id",nullable = false)
     private Padre padre;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "docente_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    @NotNull(message = "Debe haber un docente que añadir a favoritos")
+    @JoinColumn(name = "docente_id",nullable = false)
     private Docente docente;
 }

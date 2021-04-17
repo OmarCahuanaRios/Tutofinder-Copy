@@ -1,6 +1,5 @@
-package com.boot.bookingrestaurantapi.exceptions;
+package com.tutofinder.app.exception;
 
-import com.boot.bookingrestaurantapi.dtos.ErrorDto;
 import org.springframework.http.HttpStatus;
 
 import java.util.Arrays;

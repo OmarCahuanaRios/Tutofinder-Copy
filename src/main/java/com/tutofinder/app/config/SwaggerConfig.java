@@ -1,4 +1,4 @@
-package com.boot.bookingrestaurantapi.config;
+package com.tutofinder.app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2).select()
-                .apis(RequestHandlerSelectors.basePackage("com.boot.bookingrestaurantapi")).paths(PathSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.tutofinder.app")).paths(PathSelectors.any())
                 .build();
     }
 }

@@ -24,41 +24,24 @@ public class Tutoria {
     @Column(name = "descripcion_tutoria")
     private String descripcionTutoria;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "curso_id")
+    @JoinColumn(name = "curso_id",nullable = false)
     private Curso curso;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    @JoinColumn(name = "alumno_id")
+    @JoinColumn(name = "alumno_id",nullable = false)
     private Alumno alumno;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pago_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "pago_id",nullable = false)
     private Pago pago;
 
-
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "docente_id")
+    @JoinColumn(name = "docente_id",nullable = false)
     private Docente docente;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "informe_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Informe informe;
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Tutoria)) {
-            return false;
-        }
-        Tutoria p = (Tutoria) obj;
-        return this.id != null && this.id.equals(p.getId());
-    }
 }
