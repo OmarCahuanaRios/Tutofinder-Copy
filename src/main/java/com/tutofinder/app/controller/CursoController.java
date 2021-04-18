@@ -49,7 +49,7 @@ public class CursoController {
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/curso/{cursoId}")
     public BookingResponse<String> deleteCurso(@PathVariable Long cursoId)throws BookingException {
-        return new BookingResponse<>("Deleted",String.valueOf(HttpStatus.OK),"OK",
+        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 cursoService.deleteCurso(cursoId));
     }
 }

@@ -49,7 +49,7 @@ public class InformeController {
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/informe/{informeId}")
     public BookingResponse<String> deleteInforme(@PathVariable Long informeId)throws BookingException {
-        return new BookingResponse<>("Deleted",String.valueOf(HttpStatus.OK),"OK",
+        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 informeService.deleteInforme(informeId));
     }
 }

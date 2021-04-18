@@ -50,7 +50,7 @@ public class TarjetaController {
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/tarjeta/{tarjetaId}")
     public BookingResponse<String> deleteTarjeta(@PathVariable Long tarjetaId)throws BookingException {
-        return new BookingResponse<>("Deleted",String.valueOf(HttpStatus.OK),"OK",
+        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 tarjetaService.deleteTarjeta(tarjetaId));
     }
 }
