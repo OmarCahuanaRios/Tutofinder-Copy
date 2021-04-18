@@ -82,7 +82,7 @@ public class MembresiaServiceImpl implements MembresiaService {
         }
         Optional<Membresia> membresia = membresiaRepository.findById(membresiaId);
         if(!membresia.isPresent()){
-           throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
+            throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
         }
         Membresia membresiaEntity = membresia.get();
         membresiaEntity.setDescripcionMembresia(createMembresiaDto.getDescripcionMembresia());
