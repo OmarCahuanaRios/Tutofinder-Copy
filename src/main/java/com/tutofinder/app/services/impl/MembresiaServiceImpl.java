@@ -52,7 +52,7 @@ public class MembresiaServiceImpl implements MembresiaService {
         final Tarjeta tarjeta= tarjetaRepository.findById(createMembresiaDto.getTarjetaId())
                 .orElseThrow(() -> new NotFoundException("SNOT-404-1","TARJETA_NOT_FOUND"));
 
-        if(membresiaRepository.findByDocenteAndTarjetaId(docente.getId(),tarjeta.getId()).isPresent()){
+        if(membresiaRepository.findByDocenteIdAndTarjetaId(docente.getId(),tarjeta.getId()).isPresent()){
             throw new NotFoundException("MEMBRESIA_EXIST","MEMBRESIA_EXIST");
         }
         Membresia membresiaEntity;
@@ -60,7 +60,7 @@ public class MembresiaServiceImpl implements MembresiaService {
         membresia.setDescripcionMembresia(createMembresiaDto.getDescripcionMembresia());
         membresia.setFechaExpiracion(createMembresiaDto.getFechaExpiracion());
         membresia.setTarjeta(tarjeta);
-        membresia.setDocentes(docente);
+        membresia.setDocente(docente);
         membresia.setCostoMembresia(createMembresiaDto.getCostoMembresia());
 
         try {
@@ -77,7 +77,7 @@ public class MembresiaServiceImpl implements MembresiaService {
                 .orElseThrow(() -> new NotFoundException("SNOT-404-1","DOCENTE_NOT_FOUND"));
         final Tarjeta tarjeta= tarjetaRepository.findById(createMembresiaDto.getTarjetaId())
                 .orElseThrow(() -> new NotFoundException("SNOT-404-1","TARJETA_NOT_FOUND"));
-        if(membresiaRepository.findByDocenteAndTarjetaId(docente.getId(),tarjeta.getId()).isPresent()){
+        if(membresiaRepository.findByDocenteIdAndTarjetaId(docente.getId(),tarjeta.getId()).isPresent()){
             throw new NotFoundException("MEMBRESIA_EXIST","MEMBRESIA_EXIST");
         }
         Optional<Membresia> membresia = membresiaRepository.findById(membresiaId);
@@ -88,7 +88,7 @@ public class MembresiaServiceImpl implements MembresiaService {
         membresiaEntity.setDescripcionMembresia(createMembresiaDto.getDescripcionMembresia());
         membresiaEntity.setFechaExpiracion(createMembresiaDto.getFechaExpiracion());
         membresiaEntity.setTarjeta(tarjeta);
-        membresiaEntity.setDocentes(docente);
+        membresiaEntity.setDocente(docente);
         membresiaEntity.setCostoMembresia(createMembresiaDto.getCostoMembresia());
 
         try {

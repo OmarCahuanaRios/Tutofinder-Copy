@@ -3,10 +3,12 @@ package com.tutofinder.app.services.impl;
 import com.tutofinder.app.dto.DocenteDto;
 import com.tutofinder.app.dto.create.CreateDocenteDto;
 import com.tutofinder.app.entity.Docente;
+import com.tutofinder.app.entity.Membresia;
 import com.tutofinder.app.exception.BookingException;
 import com.tutofinder.app.exception.InternalServerErrorException;
 import com.tutofinder.app.exception.NotFoundException;
 import com.tutofinder.app.repository.DocenteRepository;
+import com.tutofinder.app.repository.MembresiaRepository;
 import com.tutofinder.app.services.DocenteService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +24,40 @@ public class DocenteServiceImpl implements DocenteService {
     @Autowired
     DocenteRepository docenteRepository;
 
+    @Autowired
+    MembresiaRepository membresiaRepository;
+
     public static final ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public DocenteDto getDocenteById(Long docenteId) throws BookingException {
+        Optional<Membresia> membresiaEntity = membresiaRepository.findByDocenteId(docenteId);
+        if(membresiaEntity.isPresent()){
+            Optional<Docente> docente = docenteRepository.findById(docenteId);
+            Docente docenteEntity = docente.get();
+            docenteEntity.setMembresia(true);
+            docenteRepository.save(docenteEntity);
+        }
         return modelMapper.map(getDocenteEntity(docenteId),DocenteDto.class);
     }
 
     @Override
     public List<DocenteDto> getDocentes() throws BookingException {
         final List<Docente> docenteEntity = docenteRepository.findAll();
-        return docenteEntity.stream().map(service->modelMapper.map(service,DocenteDto.class)).collect(Collectors.toList());
+        docenteEntity.forEach(
+                docente -> {
+                    Optional<Membresia> membresiaEntity = membresiaRepository.findByDocenteId(docente.getId());
+                    if(membresiaEntity.isPresent()){
+                        docente.setMembresia(true);
+                    }
+                    if(!membresiaEntity.isPresent()){
+                        docente.setMembresia(false);
+                    }
+                    docenteRepository.save(docente);
+                }
+        );
+        return docenteEntity.stream().map(
+                service->modelMapper.map(service,DocenteDto.class)).collect(Collectors.toList());
     }
 
     @Override

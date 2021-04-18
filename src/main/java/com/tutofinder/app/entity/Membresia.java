@@ -22,7 +22,7 @@ public class Membresia {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "docente_id")
-    private Docente docentes;
+    private Docente docente;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tarjeta_id")
