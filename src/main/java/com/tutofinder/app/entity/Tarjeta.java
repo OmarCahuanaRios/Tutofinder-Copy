@@ -20,7 +20,7 @@ public class Tarjeta {
     private Long id;
 
     @NotEmpty(message = "El número de tarjeta no puede estar vacío")
-    @Column(name = "numero_tarjeta", nullable = false)
+    @Column(name = "numero_tarjeta", nullable = false,length = 16)
     private String numeroTarjeta;
 
     @NotEmpty(message = "La fecha de expiración no puede estar vacía")
@@ -30,4 +30,5 @@ public class Tarjeta {
     @NotEmpty(message = "El nombre del poseedor no puede estar vacío")
     @Column(name = "nombre_poseedor", nullable = false)
     private String nombrePoseedor;
+
 }
