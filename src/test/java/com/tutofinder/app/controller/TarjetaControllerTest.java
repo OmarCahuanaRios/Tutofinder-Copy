@@ -57,6 +57,7 @@ public class TarjetaControllerTest {
         assertEquals(response.getStatus(), SUCCES_STATUS);
         assertEquals(response.getCode(), SUCCES_CODE);
         assertEquals(response.getMessage(), OK);
+        assertEquals(response.getData(), TARJETA_DTO);
     }
 
     @Test
@@ -82,7 +83,7 @@ public class TarjetaControllerTest {
     }
 
     @Test
-    public void deleteReservationTest() throws BookingException{
+    public void deleteTarjetaTest() throws BookingException{
 
         final BookingResponse<String> response = tarjetaController.deleteTarjeta(TARJETA_ID);
 
