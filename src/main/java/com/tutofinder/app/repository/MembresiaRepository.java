@@ -1,9 +1,14 @@
 package com.tutofinder.app.repository;
 
 import com.tutofinder.app.entity.Membresia;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface MembresiaRepository extends PagingAndSortingRepository<Membresia,Long> {
+public interface MembresiaRepository extends JpaRepository<Membresia,Long> {
+    Optional<Membresia> findById(Long id);
+    Optional<Membresia> findByDocenteAndTarjetaId(Long docenteId , Long tarjetaId);
+
 }

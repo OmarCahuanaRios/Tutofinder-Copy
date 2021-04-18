@@ -34,4 +34,7 @@ public class Membresia {
     @NotEmpty(message = "La descripcion no debe estar vacia")
     @Column(name = "descripcion_membresia")
     private String descripcionMembresia;
+
+    @Column(name = "costo_membresia")
+    private double costoMembresia;
 }

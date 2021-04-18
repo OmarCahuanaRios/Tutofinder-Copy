@@ -31,4 +31,6 @@ public class Pago {
     @JoinColumn(name = "tarjeta_id",nullable = false)
     private Tarjeta tarjeta;
 
+    @Column(name = "costo_pago")
+    private double costoPago;
 }
