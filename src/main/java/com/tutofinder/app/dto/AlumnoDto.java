@@ -10,10 +10,11 @@ import java.util.List;
 @Getter
 @Setter
 public class AlumnoDto {
+    private Long id;
     private String nombre;
     private String apellido;
     private String gradoEstudio;
-    private PadreDto padre;
+    private Long padreId;
     private String dni;
     private String correo;
     private List<TutoriaDto> tutorias;
