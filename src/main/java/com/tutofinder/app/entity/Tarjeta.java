@@ -31,4 +31,5 @@ public class Tarjeta {
     @Column(name = "nombre_poseedor", nullable = false)
     private String nombrePoseedor;
 
+
 }

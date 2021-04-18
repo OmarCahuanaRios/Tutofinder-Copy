@@ -1,0 +1,88 @@
+package com.tutofinder.app.services.impl;
+
+import com.tutofinder.app.dto.PadreDto;
+import com.tutofinder.app.dto.create.CreatePadreDto;
+import com.tutofinder.app.entity.Padre;
+import com.tutofinder.app.exception.BookingException;
+import com.tutofinder.app.exception.InternalServerErrorException;
+import com.tutofinder.app.exception.NotFoundException;
+import com.tutofinder.app.repository.PadreRepository;
+import com.tutofinder.app.services.PadreService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+public class PadreServiceImpl implements PadreService {
+    @Autowired
+    PadreRepository padreRepository;
+
+    public static final ModelMapper modelMapper = new ModelMapper();
+
+    @Override
+    public PadreDto getPadreById(Long padreId) throws BookingException {
+        return modelMapper.map(getPadreEntity(padreId),PadreDto.class);
+    }
+
+    @Override
+    public List<PadreDto> getPadres() throws BookingException {
+        final List<Padre> padreEntity = padreRepository.findAll();
+        return padreEntity.stream().map(service->modelMapper.map(service,PadreDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public PadreDto createPadre(CreatePadreDto createPadreDto) throws BookingException {
+        Padre padreEntity;
+        Padre padre = new Padre();
+        padre.setNombre(createPadreDto.getNombre());
+        padre.setApellido(createPadreDto.getApellido());
+        padre.setDni(createPadreDto.getDni());
+        padre.setCorreo(createPadreDto.getCorreo());
+        try {
+            padreEntity = padreRepository.save(padre);
+        } catch (final Exception e){
+            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
+        }
+        return modelMapper.map(getPadreEntity(padreEntity.getId()), PadreDto.class);
+    }
+
+    @Override
+    public PadreDto updatePadre(CreatePadreDto createPadreDto,Long padreId) throws BookingException {
+        Optional<Padre> padre = padreRepository.findById(padreId);
+        if(!padre.isPresent()){
+            throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
+        }
+        Padre padreEntity = padre.get();
+        padreEntity.setNombre(createPadreDto.getNombre());
+        padreEntity.setApellido(createPadreDto.getApellido());
+        padreEntity.setDni(createPadreDto.getDni());
+        padreEntity.setCorreo(createPadreDto.getCorreo());
+        try {
+            padreRepository.save(padreEntity);
+        } catch (final Exception e){
+            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
+        }
+        return modelMapper.map(getPadreEntity(padreEntity.getId()), PadreDto.class);
+    }
+
+    @Override
+    public String deletePadre(Long padreId) throws BookingException {
+        padreRepository.findById(padreId).
+                orElseThrow(()-> new NotFoundException("SNOT-404-1","RESTAURANT_NOT_FOUND"));
+        try {
+            padreRepository.deleteById(padreId);
+        } catch (final Exception e){
+            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
+        }
+        return "PADRE_DELETED";
+    }
+
+    private Padre getPadreEntity(Long padreId) throws BookingException{
+        return padreRepository.findById(padreId).
+                orElseThrow(()-> new NotFoundException("SNOT-404-1","RESTAURANT_NOT_FOUND"));
+    }
+}
