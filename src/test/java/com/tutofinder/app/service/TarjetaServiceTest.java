@@ -13,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.modelmapper.ModelMapper;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,16 +21,15 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 
 public class TarjetaServiceTest {
-    private static final Long TARJETA_ID = 2L;
+    private static final Long TARJETA_ID = 1L;
     private static final String NUMERO_TARJETA = "1234123412341234";
     private static final String FECHA_EXPIRACION = "05/22";
     private static final String NOMBRE_POSEEDOR = "Walter Molina";
-
     public static final Tarjeta TARJETA = new Tarjeta();
 
     CreateTarjetaDto CREATE_TARJETA_DTO = new CreateTarjetaDto();
-    private static final String TARJETA_DELETED = "TARJETA_DELETED";
 
+    private static final String TARJETA_DELETED = "TARJETA_DELETED";
     private static final Optional<Tarjeta> OPTIONAL_TARJETA_EMPTY = Optional.empty();
     private static final Optional<Tarjeta> OPTIONAL_TARJETA = Optional.of(TARJETA);
 
@@ -78,6 +76,7 @@ public class TarjetaServiceTest {
         fail();
     }
 
+    /*Arreglar el test dels id de retorno en el mapper*/
     @Test
     public void createTarjetaTest() throws BookingException{
         Mockito.when(tarjetaRepository.findById(TARJETA_ID)).thenReturn(OPTIONAL_TARJETA_EMPTY);
@@ -102,7 +101,7 @@ public class TarjetaServiceTest {
 
     @Test(expected = BookingException.class)
     public void deleteTarjetaNotFountError() throws BookingException {
-        Mockito.when(tarjetaRepository.findById(TARJETA_ID)).thenReturn(OPTIONAL_TARJETA);
+        Mockito.when(tarjetaRepository.findById(TARJETA_ID)).thenReturn(OPTIONAL_TARJETA_EMPTY);
         final String response = tarjetaServiceImpl.deleteTarjeta(TARJETA_ID);
         assertEquals(response, TARJETA_DELETED);
         fail();
