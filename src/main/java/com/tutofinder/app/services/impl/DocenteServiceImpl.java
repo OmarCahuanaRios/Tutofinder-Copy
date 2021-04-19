@@ -34,12 +34,15 @@ public class DocenteServiceImpl implements DocenteService {
     @Override
     public DocenteDto getDocenteById(Long docenteId) throws BookingException {
         Optional<Membresia> membresiaEntity = membresiaRepository.findByDocenteId(docenteId);
+        Optional<Docente> docente = docenteRepository.findById(docenteId);
+        Docente docenteEntity = docente.get();
         if(membresiaEntity.isPresent()){
-            Optional<Docente> docente = docenteRepository.findById(docenteId);
-            Docente docenteEntity = docente.get();
             docenteEntity.setMembresia(true);
-            docenteRepository.save(docenteEntity);
         }
+        if(!membresiaEntity.isPresent()){
+            docenteEntity.setMembresia(false);
+        }
+        docenteRepository.save(docenteEntity);
         return modelMapper.map(getDocenteEntity(docenteId),DocenteDto.class);
     }
 

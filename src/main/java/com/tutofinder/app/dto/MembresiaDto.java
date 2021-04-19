@@ -10,8 +10,8 @@ import java.util.Date;
 @Setter
 public class MembresiaDto {
     private Long id;
-    private Long docenteId;
-    private Long tarjetaId;
+    private DocenteDto docente;
+    private TarjetaDto tarjeta;
     private Date fechaExpiracion;
     private String descripcionMembresia;
     private double costoMembresia;
