@@ -16,5 +16,6 @@ public class DocenteDto {
     private String correo;
     private String numeroCuenta;
     private Boolean membresia;
+    private byte[] foto;
     private Date createAt;
 }

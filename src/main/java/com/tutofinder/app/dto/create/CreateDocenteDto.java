@@ -13,4 +13,5 @@ public class CreateDocenteDto {
     private String domicilio;
     private String correo;
     private String numeroCuenta;
+    private byte[] foto;
 }

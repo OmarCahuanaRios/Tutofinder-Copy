@@ -1,5 +1,6 @@
 package com.tutofinder.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,6 +49,10 @@ public class Docente {
 
     private Boolean membresia;
 
+    @Lob
+    @JsonIgnore
+    private byte[] foto;
+
     @OneToMany(mappedBy = "docente", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"docente"}, allowSetters = true)
     private List<Tutoria> tutorias;
@@ -61,4 +66,7 @@ public class Docente {
         this.createAt = new Date();
     }
 
+    public Integer getFotoHashCode(){
+        return (this.foto != null) ? this.foto.hashCode() : null;
+    }
 }

@@ -13,7 +13,9 @@ import com.tutofinder.app.services.DocenteService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,13 +63,14 @@ public class DocenteServiceImpl implements DocenteService {
     }
 
     @Override
-    public DocenteDto createDocente(CreateDocenteDto createDocenteDto) throws BookingException {
+    public DocenteDto createDocente(CreateDocenteDto createDocenteDto, MultipartFile archivo) throws BookingException, IOException {
         Docente docenteEntity;
         Docente docente = new Docente();
         docente.setNombre(createDocenteDto.getNombre());
         docente.setApellido(createDocenteDto.getApellido());
         docente.setDni(createDocenteDto.getDni());
         docente.setMembresia(false);
+        docente.setFoto(archivo.getBytes());
         docente.setDomicilio(createDocenteDto.getDomicilio());
         docente.setCorreo(createDocenteDto.getCorreo());
         docente.setNumeroCuenta(createDocenteDto.getNumeroCuenta());
@@ -80,7 +83,7 @@ public class DocenteServiceImpl implements DocenteService {
     }
 
     @Override
-    public DocenteDto updateDocente(CreateDocenteDto createDocenteDto, Long docenteId) throws BookingException {
+    public DocenteDto updateDocente(CreateDocenteDto createDocenteDto, Long docenteId,MultipartFile archivo) throws BookingException, IOException {
         Optional<Docente> docente = docenteRepository.findById(docenteId);
         if(!docente.isPresent()){
             throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
@@ -89,6 +92,7 @@ public class DocenteServiceImpl implements DocenteService {
         docenteEntity.setNombre(createDocenteDto.getNombre());
         docenteEntity.setApellido(createDocenteDto.getApellido());
         docenteEntity.setDni(createDocenteDto.getDni());
+        docenteEntity.setFoto(archivo.getBytes());
         docenteEntity.setDomicilio(createDocenteDto.getDomicilio());
         docenteEntity.setCorreo(createDocenteDto.getCorreo());
         docenteEntity.setNumeroCuenta(createDocenteDto.getNumeroCuenta());
