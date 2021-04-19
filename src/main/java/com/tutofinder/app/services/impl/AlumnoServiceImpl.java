@@ -1,8 +1,6 @@
 package com.tutofinder.app.services.impl;
 
 import com.tutofinder.app.dto.AlumnoDto;
-import com.tutofinder.app.dto.InformeDto;
-import com.tutofinder.app.dto.PadreDto;
 import com.tutofinder.app.dto.create.CreateAlumnoDto;
 import com.tutofinder.app.entity.Alumno;
 import com.tutofinder.app.entity.Padre;
@@ -15,7 +13,9 @@ import com.tutofinder.app.services.AlumnoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -44,14 +44,15 @@ public class AlumnoServiceImpl implements AlumnoService {
     }
 
     @Override
-    public AlumnoDto createAlumno(CreateAlumnoDto createAlumnoDto) throws BookingException {
+    public AlumnoDto createAlumno(CreateAlumnoDto createAlumnoDto, MultipartFile archivo) throws BookingException, IOException {
         final Padre padreId = padreRepository.findById(createAlumnoDto.getPadreId()).
                 orElseThrow(()->new NotFoundException("PADRE_NOT_FOUND","PADRE_NOT_FOUND"));
         Alumno alumnoEntity;
         Alumno alumno = new Alumno();
-        alumno.setNombre(createAlumnoDto.getNombre());
         alumno.setApellido(createAlumnoDto.getApellido());
         alumno.setGradoEstudio(createAlumnoDto.getGradoEstudio());
+        alumno.setNombre(createAlumnoDto.getNombre());
+        alumno.setFoto(archivo.getBytes());
         alumno.setPadre(padreId);
         alumno.setDni(createAlumnoDto.getDni());
         alumno.setCorreo(createAlumnoDto.getCorreo());
@@ -64,7 +65,7 @@ public class AlumnoServiceImpl implements AlumnoService {
     }
 
     @Override
-    public AlumnoDto updateAlumno(CreateAlumnoDto createAlumnoDto, Long alumnoId) throws BookingException {
+    public AlumnoDto updateAlumno(CreateAlumnoDto createAlumnoDto, Long alumnoId, MultipartFile archivo) throws BookingException, IOException {
         final Padre padreId = padreRepository.findById(createAlumnoDto.getPadreId()).
                 orElseThrow(()->new NotFoundException("PADRE_NOT_FOUND","PADRE_NOT_FOUND"));
         Optional<Alumno> alumno = alumnoRepository.findById(alumnoId);
@@ -75,6 +76,7 @@ public class AlumnoServiceImpl implements AlumnoService {
         alumnoEntity.setNombre(createAlumnoDto.getNombre());
         alumnoEntity.setApellido(createAlumnoDto.getApellido());
         alumnoEntity.setGradoEstudio(createAlumnoDto.getGradoEstudio());
+        alumnoEntity.setFoto(archivo.getBytes());
         alumnoEntity.setPadre(padreId);
         alumnoEntity.setDni(createAlumnoDto.getDni());
         alumnoEntity.setCorreo(createAlumnoDto.getCorreo());

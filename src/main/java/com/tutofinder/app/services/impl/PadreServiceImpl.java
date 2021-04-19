@@ -11,7 +11,9 @@ import com.tutofinder.app.services.PadreService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,11 +37,12 @@ public class PadreServiceImpl implements PadreService {
     }
 
     @Override
-    public PadreDto createPadre(CreatePadreDto createPadreDto) throws BookingException {
+    public PadreDto createPadre(CreatePadreDto createPadreDto, MultipartFile archivo) throws BookingException , IOException {
         Padre padreEntity;
         Padre padre = new Padre();
         padre.setNombre(createPadreDto.getNombre());
         padre.setApellido(createPadreDto.getApellido());
+        padre.setFoto(archivo.getBytes());
         padre.setDni(createPadreDto.getDni());
         padre.setCorreo(createPadreDto.getCorreo());
         try {
@@ -51,7 +54,7 @@ public class PadreServiceImpl implements PadreService {
     }
 
     @Override
-    public PadreDto updatePadre(CreatePadreDto createPadreDto,Long padreId) throws BookingException {
+    public PadreDto updatePadre(CreatePadreDto createPadreDto, Long padreId, MultipartFile archivo) throws BookingException , IOException{
         Optional<Padre> padre = padreRepository.findById(padreId);
         if(!padre.isPresent()){
             throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
@@ -59,6 +62,7 @@ public class PadreServiceImpl implements PadreService {
         Padre padreEntity = padre.get();
         padreEntity.setNombre(createPadreDto.getNombre());
         padreEntity.setApellido(createPadreDto.getApellido());
+        padreEntity.setFoto(archivo.getBytes());
         padreEntity.setDni(createPadreDto.getDni());
         padreEntity.setCorreo(createPadreDto.getCorreo());
         try {

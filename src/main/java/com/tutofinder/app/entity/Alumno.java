@@ -1,5 +1,6 @@
 package com.tutofinder.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -50,6 +51,10 @@ public class Alumno {
     @Column(unique = true,nullable = false)
     private String correo;
 
+    @Lob
+    @JsonIgnore
+    private byte[] foto;
+
     @OneToMany(mappedBy = "alumno", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"alumno"}, allowSetters = true)
     private List<Tutoria> tutorias;
@@ -62,6 +67,10 @@ public class Alumno {
     @PrePersist
     public void PrePersist() {
         this.createAt = new Date();
+    }
+
+    public Integer getFotoHashCode(){
+        return (this.foto != null) ? this.foto.hashCode() : null;
     }
 
 }

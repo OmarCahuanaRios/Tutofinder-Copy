@@ -6,10 +6,16 @@ import com.tutofinder.app.exception.BookingException;
 import com.tutofinder.app.response.BookingResponse;
 import com.tutofinder.app.services.AlumnoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -26,6 +32,14 @@ public class AlumnoController {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/alumno/{alumnoId}/img")
+    public ResponseEntity<?> getFoto(@PathVariable Long alumnoId) throws BookingException {
+        AlumnoDto optionalAlumno = alumnoService.getAlumnoById(alumnoId);
+        Resource imagen = new ByteArrayResource(optionalAlumno.getFoto());
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imagen);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/alumnos")
     BookingResponse<List<AlumnoDto>> getAlumnos()throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
@@ -34,15 +48,15 @@ public class AlumnoController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/alumno")
-    BookingResponse<AlumnoDto> createAlumno(@RequestBody @Valid CreateAlumnoDto createAlumnoDto)throws BookingException{
+    BookingResponse<AlumnoDto> createAlumno(@Valid CreateAlumnoDto createAlumnoDto , @RequestParam MultipartFile archivo)throws BookingException, IOException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
-                alumnoService.createAlumno(createAlumnoDto));
+                alumnoService.createAlumno(createAlumnoDto,archivo));
     }
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/alumno/{alumnoId}")
-    BookingResponse<AlumnoDto> updateAlumno(@PathVariable Long alumnoId , @RequestBody @Valid CreateAlumnoDto createAlumnoDto)throws BookingException{
+    BookingResponse<AlumnoDto> updateAlumno(@PathVariable Long alumnoId , @Valid CreateAlumnoDto createAlumnoDto , @RequestParam MultipartFile archivo)throws BookingException , IOException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
-                alumnoService.updateAlumno(createAlumnoDto,alumnoId));
+                alumnoService.updateAlumno(createAlumnoDto,alumnoId,archivo));
     }
 
     @ResponseStatus(HttpStatus.OK)

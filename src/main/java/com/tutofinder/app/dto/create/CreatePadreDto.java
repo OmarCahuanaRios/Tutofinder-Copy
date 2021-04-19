@@ -10,4 +10,5 @@ public class CreatePadreDto {
     private String apellido;
     private String dni;
     private String correo;
+    private byte[] foto;
 }

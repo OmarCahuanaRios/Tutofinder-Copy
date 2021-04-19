@@ -14,6 +14,7 @@ public class PadreDto {
     private String apellido;
     private String dni;
     private String correo;
+    private byte[] foto;
     private Date createAt;
     private List<AlumnoDto> alumnos;
 }

@@ -17,6 +17,7 @@ public class AlumnoDto {
     private Long padreId;
     private String dni;
     private String correo;
+    private byte[] foto;
     private List<TutoriaDto> tutorias;
     private Date createAt;
 }

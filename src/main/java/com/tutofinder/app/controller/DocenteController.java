@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/tutofinder")
@@ -37,7 +36,6 @@ public class DocenteController {
     public ResponseEntity<?> getFoto(@PathVariable Long docenteId) throws BookingException {
         DocenteDto optionalDocente = docenteService.getDocenteById(docenteId);
         Resource imagen = new ByteArrayResource(optionalDocente.getFoto());
-
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imagen);
     }
 
