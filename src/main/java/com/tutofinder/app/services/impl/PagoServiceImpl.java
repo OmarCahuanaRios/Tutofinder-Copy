@@ -15,6 +15,7 @@ import com.tutofinder.app.services.PagoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,11 +36,13 @@ public class PagoServiceImpl implements PagoService{
     public static final ModelMapper modelMapper = new ModelMapper();
 
     @Override
+    @Transactional(readOnly = true)
     public PagoDto getPagoById(Long pagoId) throws BookingException {
         return modelMapper.map(getPagoEntity(pagoId),PagoDto.class);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<PagoDto> getPagos() throws BookingException {
         List<Pago> pagoEntity = pagoRepository.findAll();
         return pagoEntity.stream().map(service->modelMapper.map(service,PagoDto.class)).collect(Collectors.toList());
@@ -100,6 +103,6 @@ public class PagoServiceImpl implements PagoService{
 
     public Pago getPagoEntity(Long pagoId) throws BookingException{
         return pagoRepository.findById(pagoId)
-                .orElseThrow(()-> new NotFoundException("SNOT-404-1","TARJETA_NOT_FOUND"));
+                .orElseThrow(()-> new NotFoundException("SNOT-404-1","PAGO_NOT_FOUND"));
     }
 }

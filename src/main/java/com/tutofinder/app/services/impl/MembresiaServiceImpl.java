@@ -15,6 +15,7 @@ import com.tutofinder.app.services.MembresiaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,11 +36,13 @@ public class MembresiaServiceImpl implements MembresiaService {
     public static final ModelMapper modelMapper = new ModelMapper();
 
     @Override
+    @Transactional(readOnly = true)
     public MembresiaDto getMembresiaById(Long membresiaId) throws BookingException {
         return modelMapper.map(getMembresiaEntity(membresiaId),MembresiaDto.class);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<MembresiaDto> getMembresias() throws BookingException {
         List<Membresia> membresiaEntity = membresiaRepository.findAll();
         return membresiaEntity.stream().map(service -> modelMapper.map(service,MembresiaDto.class)).collect(Collectors.toList());

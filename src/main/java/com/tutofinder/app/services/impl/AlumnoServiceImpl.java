@@ -13,6 +13,7 @@ import com.tutofinder.app.services.AlumnoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -33,11 +34,13 @@ public class AlumnoServiceImpl implements AlumnoService {
     public static ModelMapper modelMapper = new ModelMapper();
 
     @Override
+    @Transactional(readOnly = true)
     public AlumnoDto getAlumnoById(Long alumnoId) throws BookingException {
         return modelMapper.map(getAlumnoEntity(alumnoId),AlumnoDto.class);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<AlumnoDto> getAlumnos() throws BookingException {
         List<Alumno> alumnoEntity = alumnoRepository.findAll();
         return alumnoEntity.stream().map(service->modelMapper.map(service,AlumnoDto.class)).collect(Collectors.toList());

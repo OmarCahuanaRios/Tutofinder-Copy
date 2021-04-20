@@ -13,6 +13,7 @@ import com.tutofinder.app.services.DocenteService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -32,6 +33,7 @@ public class DocenteServiceImpl implements DocenteService {
     public static final ModelMapper modelMapper = new ModelMapper();
 
     @Override
+    @Transactional
     public DocenteDto getDocenteById(Long docenteId) throws BookingException {
         Optional<Membresia> membresiaEntity = membresiaRepository.findByDocenteId(docenteId);
         Optional<Docente> docente = docenteRepository.findById(docenteId);
@@ -47,6 +49,7 @@ public class DocenteServiceImpl implements DocenteService {
     }
 
     @Override
+    @Transactional
     public List<DocenteDto> getDocentes() throws BookingException {
         final List<Docente> docenteEntity = docenteRepository.findAll();
         docenteEntity.forEach(

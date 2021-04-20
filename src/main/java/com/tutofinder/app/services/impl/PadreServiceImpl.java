@@ -11,6 +11,7 @@ import com.tutofinder.app.services.PadreService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -26,11 +27,13 @@ public class PadreServiceImpl implements PadreService {
     public static final ModelMapper modelMapper = new ModelMapper();
 
     @Override
+    @Transactional(readOnly = true)
     public PadreDto getPadreById(Long padreId) throws BookingException {
         return modelMapper.map(getPadreEntity(padreId),PadreDto.class);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<PadreDto> getPadres() throws BookingException {
         final List<Padre> padreEntity = padreRepository.findAll();
         return padreEntity.stream().map(service->modelMapper.map(service,PadreDto.class)).collect(Collectors.toList());
