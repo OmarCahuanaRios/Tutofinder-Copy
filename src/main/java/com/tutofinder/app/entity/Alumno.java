@@ -37,6 +37,7 @@ public class Alumno {
     @Column(name = "grado_estudio",nullable = false)
     private String gradoEstudio;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "padre_id",nullable = false)
     @NotNull(message = "Debe de haber un padre")

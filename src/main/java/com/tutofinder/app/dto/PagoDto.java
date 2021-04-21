@@ -9,7 +9,7 @@ import lombok.Setter;
 public class PagoDto {
     private Long id;
     private String descripcionPago;
-    private PadreDto padre;
-    private TarjetaDto tarjeta;
+    private Long padreId;
+    private Long tarjetaId;
     private double costoPago;
 }
