@@ -96,6 +96,9 @@ public class FavoritoServiceImpl implements FavoritoService {
                 .orElseThrow(() -> new NotFoundException("SNOT-404-1","DOCENTE_NOT_FOUND"));
 
         Optional<Favorito> favorito = favoritoRepository.findById(favoritoId);
+        if(!favorito.isPresent()){
+            throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
+        }
         Favorito favoritoEntity = favorito.get();
         favoritoEntity.setDocente(docente);
         favoritoEntity.setPadre(padre);

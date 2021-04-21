@@ -19,7 +19,7 @@ public class Informe {
     @Column(name = "informe_id")
     private Long id;
 
-    @Column(name = "descripcion_informe")
+    @Column(name = "descripcion_informe",nullable = false)
     private String descripcionInforme;
 
 }

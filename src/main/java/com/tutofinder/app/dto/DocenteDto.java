@@ -15,6 +15,7 @@ public class DocenteDto {
     private String domicilio;
     private String correo;
     private String numeroCuenta;
+    private double costoHora;
     private Boolean membresia;
     private byte[] foto;
     private Date createAt;

@@ -9,6 +9,7 @@ import lombok.Setter;
 public class CreateDocenteDto {
     private String nombre;
     private String apellido;
+    private double costoHora;
     private String dni;
     private String domicilio;
     private String correo;

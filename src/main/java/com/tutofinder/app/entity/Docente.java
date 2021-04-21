@@ -47,6 +47,9 @@ public class Docente {
     @Column(unique = true,nullable = false,name = "numero_cuenta")
     private String numeroCuenta;
 
+    @Column(name = "costo_hora",nullable = false)
+    private double CostoHora;
+
     private Boolean membresia;
 
     @Lob

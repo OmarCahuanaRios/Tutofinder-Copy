@@ -78,6 +78,9 @@ public class PagoServiceImpl implements PagoService{
                 .orElseThrow(()-> new NotFoundException("SNOT-404-1","PADRE_NOT_FOUND"));
 
         Optional<Pago> pago = pagoRepository.findById(pagoId);
+        if(!pago.isPresent()){
+            throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
+        }
         Pago pagoEntity = pago.get();
         pagoEntity.setDescripcionPago(createPagoDto.getDescripcionPago());
         pagoEntity.setCostoPago(createPagoDto.getCostoPago());

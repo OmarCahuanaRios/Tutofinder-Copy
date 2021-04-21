@@ -76,6 +76,7 @@ public class DocenteServiceImpl implements DocenteService {
         docente.setApellido(createDocenteDto.getApellido());
         docente.setDni(createDocenteDto.getDni());
         docente.setMembresia(false);
+        docente.setCostoHora(createDocenteDto.getCostoHora());
         docente.setFoto(archivo.getBytes());
         docente.setDomicilio(createDocenteDto.getDomicilio());
         docente.setCorreo(createDocenteDto.getCorreo());
@@ -99,6 +100,7 @@ public class DocenteServiceImpl implements DocenteService {
         docenteEntity.setApellido(createDocenteDto.getApellido());
         docenteEntity.setDni(createDocenteDto.getDni());
         docenteEntity.setFoto(archivo.getBytes());
+        docenteEntity.setCostoHora(createDocenteDto.getCostoHora());
         docenteEntity.setDomicilio(createDocenteDto.getDomicilio());
         docenteEntity.setCorreo(createDocenteDto.getCorreo());
         docenteEntity.setNumeroCuenta(createDocenteDto.getNumeroCuenta());
