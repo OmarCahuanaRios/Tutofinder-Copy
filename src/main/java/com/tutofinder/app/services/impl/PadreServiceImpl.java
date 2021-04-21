@@ -40,6 +40,7 @@ public class PadreServiceImpl implements PadreService {
     }
 
     @Override
+    @Transactional
     public PadreDto createPadre(CreatePadreDto createPadreDto, MultipartFile archivo) throws BookingException , IOException {
         Padre padreEntity;
         Padre padre = new Padre();
@@ -57,6 +58,7 @@ public class PadreServiceImpl implements PadreService {
     }
 
     @Override
+    @Transactional
     public PadreDto updatePadre(CreatePadreDto createPadreDto, Long padreId, MultipartFile archivo) throws BookingException , IOException{
         Optional<Padre> padre = padreRepository.findById(padreId);
         if(!padre.isPresent()){

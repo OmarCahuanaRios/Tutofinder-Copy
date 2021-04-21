@@ -11,6 +11,7 @@ import com.tutofinder.app.services.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,11 +26,13 @@ public class CursoServiceImpl implements CursoService {
     public static final ModelMapper modelMapper = new ModelMapper();
 
     @Override
+    @Transactional(readOnly = true)
     public CursoDto getCursoById(Long cursoId) throws BookingException {
         return modelMapper.map(getCursoEntity(cursoId),CursoDto.class);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CursoDto> getCursos() throws BookingException {
         final List<Curso> cursosEntity= cursoRepository.findAll();
         return cursosEntity.stream().map(service->modelMapper.map(service,CursoDto.class))

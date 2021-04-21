@@ -11,6 +11,7 @@ import com.tutofinder.app.services.TarjetaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +37,7 @@ public class TarjetaServiceImpl implements TarjetaService {
     }
 
     @Override
+    @Transactional
     public TarjetaDto createTarjeta(CreateTarjetaDto createTarjetaDto) throws BookingException {
         Tarjeta tarjetaEntity;
         Tarjeta tarjeta = new Tarjeta();
@@ -53,6 +55,7 @@ public class TarjetaServiceImpl implements TarjetaService {
     }
 
     @Override
+    @Transactional
     public TarjetaDto updateTarjeta(CreateTarjetaDto createTarjetaDto, Long tarjetaId) throws BookingException {
         Optional<Tarjeta> tarjeta = tarjetaRepository.findById(tarjetaId);
         if(!tarjeta.isPresent()){

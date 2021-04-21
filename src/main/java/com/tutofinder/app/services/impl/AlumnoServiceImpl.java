@@ -47,6 +47,7 @@ public class AlumnoServiceImpl implements AlumnoService {
     }
 
     @Override
+    @Transactional
     public AlumnoDto createAlumno(CreateAlumnoDto createAlumnoDto, MultipartFile archivo) throws BookingException, IOException {
         final Padre padreId = padreRepository.findById(createAlumnoDto.getPadreId()).
                 orElseThrow(()->new NotFoundException("PADRE_NOT_FOUND","PADRE_NOT_FOUND"));
@@ -68,6 +69,7 @@ public class AlumnoServiceImpl implements AlumnoService {
     }
 
     @Override
+    @Transactional
     public AlumnoDto updateAlumno(CreateAlumnoDto createAlumnoDto, Long alumnoId, MultipartFile archivo) throws BookingException, IOException {
         final Padre padreId = padreRepository.findById(createAlumnoDto.getPadreId()).
                 orElseThrow(()->new NotFoundException("PADRE_NOT_FOUND","PADRE_NOT_FOUND"));

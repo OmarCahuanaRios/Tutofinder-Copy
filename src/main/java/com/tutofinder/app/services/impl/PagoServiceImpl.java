@@ -49,6 +49,7 @@ public class PagoServiceImpl implements PagoService{
     }
 
     @Override
+    @Transactional
     public PagoDto createPago(CreatePagoDto createPagoDto) throws BookingException {
         final Tarjeta tarjeta = tarjetaRepository.findById(createPagoDto.getTarjetaId())
                 .orElseThrow(()-> new NotFoundException("SNOT-404-1","TARJETA_NOT_FOUND"));
@@ -69,6 +70,7 @@ public class PagoServiceImpl implements PagoService{
     }
 
     @Override
+    @Transactional
     public PagoDto updatePago(CreatePagoDto createPagoDto, Long pagoId) throws BookingException {
         final Tarjeta tarjeta = tarjetaRepository.findById(createPagoDto.getTarjetaId())
                 .orElseThrow(()-> new NotFoundException("SNOT-404-1","TARJETA_NOT_FOUND"));
