@@ -28,6 +28,13 @@ public class FavoritoController {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/favoritos/{padreId}")
+    public BookingResponse<List<FavoritoDto>> getFavoritoByPadreId(@PathVariable Long padreId) throws BookingException {
+        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+                favoritoService.getFavoritoByPadreId(padreId));
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/favoritos")
     public BookingResponse<List<FavoritoDto>> getFavoritos() throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",

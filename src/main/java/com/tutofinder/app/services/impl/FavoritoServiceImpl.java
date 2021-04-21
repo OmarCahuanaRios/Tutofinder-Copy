@@ -52,6 +52,13 @@ public class FavoritoServiceImpl implements FavoritoService {
 
     @Override
     @Transactional(readOnly = true)
+    public List<FavoritoDto> getFavoritoByPadreId(Long padreId) throws BookingException {
+        List<Favorito> favoritoEntity = favoritoRepository.findFavoritoByPadreId(padreId);
+        return favoritoEntity.stream().map(service->modelMapper.map(service,FavoritoDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<FavoritoDto> getFavoritos(Pageable pageable) throws BookingException {
         Page<Favorito> favorito = favoritoRepository.findAll(pageable);
         return favorito.stream().map(service->modelMapper.map(service,FavoritoDto.class)).collect(Collectors.toList());
