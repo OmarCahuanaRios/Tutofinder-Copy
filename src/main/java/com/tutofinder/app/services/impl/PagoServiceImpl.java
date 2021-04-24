@@ -2,17 +2,11 @@ package com.tutofinder.app.services.impl;
 
 import com.tutofinder.app.dto.PagoDto;
 import com.tutofinder.app.dto.create.CreatePagoDto;
-import com.tutofinder.app.entity.Padre;
-import com.tutofinder.app.entity.Pago;
-import com.tutofinder.app.entity.Tarjeta;
-import com.tutofinder.app.entity.Tutoria;
+import com.tutofinder.app.entity.*;
 import com.tutofinder.app.exception.BookingException;
 import com.tutofinder.app.exception.InternalServerErrorException;
 import com.tutofinder.app.exception.NotFoundException;
-import com.tutofinder.app.repository.PadreRepository;
-import com.tutofinder.app.repository.PagoRepository;
-import com.tutofinder.app.repository.TarjetaRepository;
-import com.tutofinder.app.repository.TutoriaRepository;
+import com.tutofinder.app.repository.*;
 import com.tutofinder.app.services.PagoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +30,7 @@ public class PagoServiceImpl implements PagoService{
     PadreRepository padreRepository;
 
     @Autowired
-    TutoriaRepository tutoriaRepository;
-
+    ReservaRepository reservaRepository;
 
     public static final ModelMapper modelMapper = new ModelMapper();
 
@@ -61,17 +54,17 @@ public class PagoServiceImpl implements PagoService{
                 .orElseThrow(()-> new NotFoundException("SNOT-404-1","TARJETA_NOT_FOUND"));
         final Padre padre = padreRepository.findById(createPagoDto.getPadreId())
                 .orElseThrow(()-> new NotFoundException("SNOT-404-1","PADRE_NOT_FOUND"));
-        final Tutoria tutoria = tutoriaRepository.findById(createPagoDto.getTutoriaId()).
-                orElseThrow(()->new NotFoundException("TUTORIA_NOT_FOUND","TUTORIA_NOT_FOUND"));
-        Pago pagoEntity;
-        Pago pago = new Pago();
-        pago.setDescripcionPago(createPagoDto.getDescripcionPago());
-        pago.setCostoPago(createPagoDto.getCostoPago());
-        pago.setPadre(padre);
-        pago.setTutoria(tutoria);
-        pago.setTarjeta(tarjeta);
+        final Reserva reserva = reservaRepository.findById(createPagoDto.getPadreId())
+                .orElseThrow(()-> new NotFoundException("SNOT-404-1","RESERVA_NOT_FOUND"));
+
+        Pago pagoEntity = new Pago();
+        pagoEntity.setDescripcionPago(createPagoDto.getDescripcionPago());
+        pagoEntity.setCostoPago(createPagoDto.getCostoPago());
+        pagoEntity.setPadre(padre);
+        pagoEntity.setReserva(reserva);
+        pagoEntity.setTarjeta(tarjeta);
         try {
-            pagoEntity = pagoRepository.save(pago);
+            pagoRepository.save(pagoEntity);
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }

@@ -32,8 +32,6 @@ public class AlumnoServiceImpl implements AlumnoService {
     @Autowired
     PadreRepository padreRepository;
 
-    @Autowired
-    TutoriaRepository tutoriaRepository;
 
     public static ModelMapper modelMapper = new ModelMapper();
 
@@ -55,8 +53,7 @@ public class AlumnoServiceImpl implements AlumnoService {
     public AlumnoDto createAlumno(CreateAlumnoDto createAlumnoDto, MultipartFile archivo) throws BookingException, IOException {
         final Padre padre = padreRepository.findById(createAlumnoDto.getPadreId()).
                 orElseThrow(()->new NotFoundException("PADRE_NOT_FOUND","PADRE_NOT_FOUND"));
-        final Tutoria tutoria = tutoriaRepository.findById(createAlumnoDto.getTutoriaId()).
-                orElseThrow(()->new NotFoundException("TUTORIA_NOT_FOUND","TUTORIA_NOT_FOUND"));
+
         Alumno alumnoEntity;
         Alumno alumno = new Alumno();
         alumno.setApellido(createAlumnoDto.getApellido());
@@ -64,7 +61,6 @@ public class AlumnoServiceImpl implements AlumnoService {
         alumno.setNombre(createAlumnoDto.getNombre());
         alumno.setFoto(archivo.getBytes());
         alumno.setPadre(padre);
-        alumno.setTutoria(tutoria);
         alumno.setDni(createAlumnoDto.getDni());
         alumno.setCorreo(createAlumnoDto.getCorreo());
         try {
@@ -80,8 +76,6 @@ public class AlumnoServiceImpl implements AlumnoService {
     public AlumnoDto updateAlumno(CreateAlumnoDto createAlumnoDto, Long alumnoId, MultipartFile archivo) throws BookingException, IOException {
         final Padre padre = padreRepository.findById(createAlumnoDto.getPadreId()).
                 orElseThrow(()->new NotFoundException("PADRE_NOT_FOUND","PADRE_NOT_FOUND"));
-        final Tutoria tutoria = tutoriaRepository.findById(createAlumnoDto.getTutoriaId()).
-                orElseThrow(()->new NotFoundException("TUTORIA_NOT_FOUND","TUTORIA_NOT_FOUND"));
         Optional<Alumno> alumno = alumnoRepository.findById(alumnoId);
         if(!alumno.isPresent()){
             throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
@@ -92,7 +86,6 @@ public class AlumnoServiceImpl implements AlumnoService {
         alumnoEntity.setGradoEstudio(createAlumnoDto.getGradoEstudio());
         alumnoEntity.setFoto(archivo.getBytes());
         alumnoEntity.setPadre(padre);
-        alumnoEntity.setTutoria(tutoria);
         alumnoEntity.setDni(createAlumnoDto.getDni());
         alumnoEntity.setCorreo(createAlumnoDto.getCorreo());
         try {

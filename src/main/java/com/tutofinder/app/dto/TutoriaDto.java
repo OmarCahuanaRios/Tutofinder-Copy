@@ -12,8 +12,7 @@ public class TutoriaDto {
     private int cantidadHoras;
     private String descripcionTutoria;
     private Long cursoId;
-    private List<AlumnoDto> alumno;
-    private List<PagoDto> pago;
+    private List<ReservaDto> reservas;
     private Long docenteId;
-    private List<InformeDto> informe;
+    private List<InformeDto> informes;
 }

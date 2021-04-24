@@ -1,6 +1,7 @@
 package com.tutofinder.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.tutofinder.app.dto.AlumnoDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,14 +32,15 @@ public class Tutoria {
 
     @OneToMany(mappedBy = "tutoria", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"tutoria"}, allowSetters = true)
-    private List<Alumno> alumnos;
+    private List<Reserva> reservas;
 
     @OneToMany(mappedBy = "tutoria", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"tutoria"}, allowSetters = true)
-    private List<Pago> pagos;
+    private List<Informe> informes;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "docente_id",nullable = false)
     private Docente docente;
+
 
 }

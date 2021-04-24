@@ -39,14 +39,13 @@ public class TarjetaServiceImpl implements TarjetaService {
     @Override
     @Transactional
     public TarjetaDto createTarjeta(CreateTarjetaDto createTarjetaDto) throws BookingException {
-        Tarjeta tarjetaEntity;
-        Tarjeta tarjeta = new Tarjeta();
-        tarjeta.setNombrePoseedor(createTarjetaDto.getNombrePoseedor());
-        tarjeta.setNumeroTarjeta(createTarjetaDto.getNumeroTarjeta());
-        tarjeta.setFechaExpiracion(createTarjetaDto.getFechaExpiracion());
+        Tarjeta tarjetaEntity = new Tarjeta();
+        tarjetaEntity.setNombrePoseedor(createTarjetaDto.getNombrePoseedor());
+        tarjetaEntity.setNumeroTarjeta(createTarjetaDto.getNumeroTarjeta());
+        tarjetaEntity.setFechaExpiracion(createTarjetaDto.getFechaExpiracion());
 
         try {
-            tarjetaEntity = tarjetaRepository.save(tarjeta);
+            tarjetaRepository.save(tarjetaEntity);
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }

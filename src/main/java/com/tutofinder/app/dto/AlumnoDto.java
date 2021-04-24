@@ -17,6 +17,5 @@ public class AlumnoDto {
     private String dni;
     private String correo;
     private byte[] foto;
-    private TutoriaDto tutoria;
     private Date createAt;
 }

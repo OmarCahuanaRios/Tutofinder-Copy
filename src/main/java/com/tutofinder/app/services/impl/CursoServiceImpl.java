@@ -41,11 +41,10 @@ public class CursoServiceImpl implements CursoService {
 
     @Override
     public CursoDto createCurso(CreateCursoDto createCursoDto) throws BookingException {
-        Curso cursoEntity;
-        Curso curso = new Curso();
-        curso.setNombre(createCursoDto.getNombre());
+        Curso cursoEntity = new Curso();
+        cursoEntity.setNombre(createCursoDto.getNombre());
         try {
-            cursoEntity=cursoRepository.save(curso);
+            cursoRepository.save(cursoEntity);
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }

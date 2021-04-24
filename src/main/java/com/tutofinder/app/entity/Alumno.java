@@ -56,10 +56,6 @@ public class Alumno {
     @JsonIgnore
     private byte[] foto;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tutoria_id")
-    private Tutoria tutoria;
-
     @Column(name = "create_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;

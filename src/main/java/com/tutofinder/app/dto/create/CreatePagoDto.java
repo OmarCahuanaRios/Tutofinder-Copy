@@ -11,4 +11,5 @@ public class CreatePagoDto {
     private Long tarjetaId;
     private Long tutoriaId;
     private double costoPago;
+    private Long reservaId;
 }
