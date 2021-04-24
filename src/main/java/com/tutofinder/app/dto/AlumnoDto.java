@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -18,6 +17,6 @@ public class AlumnoDto {
     private String dni;
     private String correo;
     private byte[] foto;
-    private List<TutoriaDto> tutorias;
+    private TutoriaDto tutoria;
     private Date createAt;
 }

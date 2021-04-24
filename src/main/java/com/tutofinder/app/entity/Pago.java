@@ -33,4 +33,8 @@ public class Pago {
 
     @Column(name = "costo_pago")
     private double costoPago;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tutoria_id")
+    private Tutoria tutoria;
 }

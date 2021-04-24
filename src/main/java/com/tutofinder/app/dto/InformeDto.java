@@ -9,4 +9,6 @@ import lombok.Setter;
 public class InformeDto {
     private Long id;
     private String descripcionInforme;
+    private TutoriaDto tutoria;
+    private AlumnoDto alumnoDto;
 }

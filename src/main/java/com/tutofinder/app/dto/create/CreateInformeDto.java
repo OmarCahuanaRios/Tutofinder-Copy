@@ -7,4 +7,6 @@ import lombok.Setter;
 @Setter
 public class CreateInformeDto {
     private String descripcionInforme;
+    private Long tutoriaId;
+    private Long alumnoId;
 }

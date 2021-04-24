@@ -3,6 +3,8 @@ package com.tutofinder.app.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class TutoriaDto {
@@ -10,8 +12,8 @@ public class TutoriaDto {
     private int cantidadHoras;
     private String descripcionTutoria;
     private Long cursoId;
-    private Long alumnoId;
-    private Long pagoId;
+    private List<AlumnoDto> alumno;
+    private List<PagoDto> pago;
     private Long docenteId;
-    private Long informeId;
+    private List<InformeDto> informe;
 }

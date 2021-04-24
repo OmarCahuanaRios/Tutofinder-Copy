@@ -9,8 +9,5 @@ public class CreateTutoriaDto {
     private int cantidadHoras;
     private String descripcionTutoria;
     private Long cursoId;
-    private Long alumnoId;
-    private Long pagoId;
     private Long docenteId;
-    private Long informeId;
 }

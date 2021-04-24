@@ -12,5 +12,6 @@ public class CreateAlumnoDto {
     private Long padreId;
     private String dni;
     private String correo;
+    private Long tutoriaId;
     private byte[] foto;
 }

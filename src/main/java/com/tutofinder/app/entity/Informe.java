@@ -22,4 +22,11 @@ public class Informe {
     @Column(name = "descripcion_informe",nullable = false)
     private String descripcionInforme;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tutoria_id")
+    private Tutoria tutoria;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "alumno_id")
+    private Alumno alumno;
 }

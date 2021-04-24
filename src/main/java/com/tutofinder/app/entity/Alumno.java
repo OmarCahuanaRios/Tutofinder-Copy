@@ -56,10 +56,9 @@ public class Alumno {
     @JsonIgnore
     private byte[] foto;
 
-    @OneToMany(mappedBy = "alumno", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = {"alumno"}, allowSetters = true)
-    private List<Tutoria> tutorias;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tutoria_id")
+    private Tutoria tutoria;
 
     @Column(name = "create_at")
     @Temporal(TemporalType.TIMESTAMP)

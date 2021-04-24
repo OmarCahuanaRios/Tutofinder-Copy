@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,21 +29,16 @@ public class Tutoria {
     @JoinColumn(name = "curso_id",nullable = false)
     private Curso curso;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "alumno_id")
-    private Alumno alumno;
+    @OneToMany(mappedBy = "tutoria", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = {"tutoria"}, allowSetters = true)
+    private List<Alumno> alumnos;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pago_id")
-    private Pago pago;
+    @OneToMany(mappedBy = "tutoria", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = {"tutoria"}, allowSetters = true)
+    private List<Pago> pagos;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "docente_id",nullable = false)
     private Docente docente;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "informe_id")
-    private Informe informe;
-
 
 }

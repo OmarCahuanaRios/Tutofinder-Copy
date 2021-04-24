@@ -46,7 +46,7 @@ public class TarjetaServiceImpl implements TarjetaService {
         tarjeta.setFechaExpiracion(createTarjetaDto.getFechaExpiracion());
 
         try {
-            tarjetaEntity= tarjetaRepository.save(tarjeta);
+            tarjetaEntity = tarjetaRepository.save(tarjeta);
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
@@ -90,6 +90,5 @@ public class TarjetaServiceImpl implements TarjetaService {
     private Tarjeta getTarjetaEntity(Long tarjetaId) throws BookingException{
         return tarjetaRepository.findById(tarjetaId)
                 .orElseThrow(()-> new NotFoundException("SNOT-404-1","TARJETA_NOT_FOUND"));
-
     }
 }

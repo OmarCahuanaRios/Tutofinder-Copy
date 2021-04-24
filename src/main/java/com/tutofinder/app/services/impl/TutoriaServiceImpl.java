@@ -71,24 +71,12 @@ public class TutoriaServiceImpl implements TutoriaService {
         final Curso curso = cursoRepository.findById(createTutoriaDto.getCursoId())
                 .orElseThrow(() -> new NotFoundException("SNOT-404-1","CURSO_NOT_FOUND"));
 
-        final Alumno alumno = alumnoRepository.findById(createTutoriaDto.getAlumnoId())
-                .orElseThrow(() -> new NotFoundException("SNOT-404-1","ALUMNO_NOT_FOUND"));
-
-        final Pago pago = pagoRepository.findById(createTutoriaDto.getPagoId())
-                .orElseThrow(() -> new NotFoundException("SNOT-404-1","PAGO_NOT_FOUND"));
-
-        final Informe informe = informeRepository.findById(createTutoriaDto.getInformeId())
-                .orElseThrow(() -> new NotFoundException("SNOT-404-1","INFORME_NOT_FOUND"));
-
         Tutoria tutoriaEntity;
         Tutoria tutoria = new Tutoria();
         tutoria.setDescripcionTutoria(createTutoriaDto.getDescripcionTutoria());
         tutoria.setCantidadHoras(createTutoriaDto.getCantidadHoras());
         tutoria.setCurso(curso);
         tutoria.setDocente(docente);
-        tutoria.setAlumno(alumno);
-        tutoria.setPago(pago);
-        tutoria.setInforme(informe);
 
         try {
             tutoriaEntity = tutoriaRepository.save(tutoria);
@@ -103,12 +91,6 @@ public class TutoriaServiceImpl implements TutoriaService {
     public TutoriaDto updateTutoria(CreateTutoriaDto createTutoriaDto, Long tutoriaId) throws BookingException {
         final Curso curso = cursoRepository.findById(createTutoriaDto.getCursoId())
                 .orElseThrow(() -> new NotFoundException("SNOT-404-1","CURSO_NOT_FOUND"));
-        final Alumno alumno = alumnoRepository.findById(createTutoriaDto.getAlumnoId())
-                .orElseThrow(() -> new NotFoundException("SNOT-404-1","AlUMNO_NOT_FOUND"));
-        final Pago pago = pagoRepository.findById(createTutoriaDto.getPagoId())
-                .orElseThrow(() -> new NotFoundException("SNOT-404-1","PAGO_NOT_FOUND"));
-        final Informe informe = informeRepository.findById(createTutoriaDto.getInformeId())
-                .orElseThrow(() -> new NotFoundException("SNOT-404-1","INFORME_NOT_FOUND"));;
         Optional<Tutoria> tutoria = tutoriaRepository.findById(tutoriaId);
         if(!tutoria.isPresent()){
             throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
@@ -117,9 +99,6 @@ public class TutoriaServiceImpl implements TutoriaService {
         tutoriaEntity.setDescripcionTutoria(createTutoriaDto.getDescripcionTutoria());
         tutoriaEntity.setCantidadHoras(createTutoriaDto.getCantidadHoras());
         tutoriaEntity.setCurso(curso);
-        tutoriaEntity.setAlumno(alumno);
-        tutoriaEntity.setPago(pago);
-        tutoriaEntity.setInforme(informe);
         try {
             tutoriaRepository.save(tutoriaEntity);
         } catch (final Exception e){
