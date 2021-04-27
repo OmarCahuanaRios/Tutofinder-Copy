@@ -1,14 +1,15 @@
 ﻿@tag
 Feature: RealizarPago
 	COMO padre
-	QUIERO realizaar el pago de una de las tutorias que mi hijo se inscribio	
+	QUIERO realizar el pago de una de las tutorias que mi hijo se inscribio
 	PARA culminar el servicio de la tutoria 
 
 
 Scenario: Realizar Pago
 	Given un padre desea realizar el pago de una tutoria inscrita pro su hijo en la pagina web
 	When seleccione el usuario de su hijo, verifica las tutorias que realizo y seleccione la opcion “Realizar pago”
-	Then se mostrará una interfaz donde se le pedirá al padre que seleccione la tarjeta registrada anteriormente, completar el campo cvc y seleccionar la opción “Pagar”
+	Then se mostrará una interfaz donde se le pedirá al padre que seleccione la tarjeta registrada anteriormente
+	And  seleccionar la opción “Pagar”
 
 
 Scenario: Comprobante

@@ -11,7 +11,6 @@ Scenario: Sobreescritura de datos
 	Then la aplicación le permitirá escribir sobre estos
 
 
-
 Scenario: Confirmación mediante contraseña
     Given que ya actualicé mis datos
 	When quiera confirmar estos cambios

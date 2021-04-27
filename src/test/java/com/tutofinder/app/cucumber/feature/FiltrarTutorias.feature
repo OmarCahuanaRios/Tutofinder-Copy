@@ -1,7 +1,7 @@
 ﻿@tag
-Feature: FiltrarDocentes
+Feature: FiltrarTutoria
 	COMO padre de familia 
-	QUIERO filtrar la lista de docentes 
+	QUIERO filtrar la lista de tutorias
 	PARA una óptima búsqueda con respecto a mis requerimientos
 
 

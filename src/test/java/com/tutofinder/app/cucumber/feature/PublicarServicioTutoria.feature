@@ -30,3 +30,7 @@ Scenario: Eliminar tutoría publicada
 	When el docente iniciara sesión en la web y se dirigirá a la opción “Mis tutorías”
 	Then se mostrará un interfaz  donde el docente escogerá la tutoría publicada
 	And finalmente seleccionará la opción “eliminar”
+
+
+
+

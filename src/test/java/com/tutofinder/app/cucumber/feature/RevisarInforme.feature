@@ -1,5 +1,5 @@
 ﻿@tag
-Feature: MostrarInformes
+Feature: RevisarInformes
 	COMO padre de familia 
 	QUIERO poder revisar los informes de mi hijo 
 	PARA poder conocer detalladamente su desempeño académico
