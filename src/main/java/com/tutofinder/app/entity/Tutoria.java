@@ -42,5 +42,4 @@ public class Tutoria {
     @JoinColumn(name = "docente_id",nullable = false)
     private Docente docente;
 
-
 }

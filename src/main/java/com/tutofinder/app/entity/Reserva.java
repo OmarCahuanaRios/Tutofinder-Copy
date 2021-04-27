@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
@@ -26,4 +27,12 @@ public class Reserva {
     @JoinColumn(name = "tutoria_id")
     private Tutoria tutoria;
 
+    @Column(name = "create_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createAt;
+
+    @PrePersist
+    public void PrePersist() {
+        this.createAt = new Date();
+    }
 }

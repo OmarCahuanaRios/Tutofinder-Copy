@@ -1,10 +1,8 @@
 package com.tutofinder.app.dto.create;
 
-import com.tutofinder.app.dto.AlumnoDto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 
 @Getter
 @Setter
