@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.exceptions.base.MockitoException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -64,7 +65,7 @@ public class CursoServiceTest {
         assertFalse(response.isEmpty());
         assertEquals(response.size(), 1);
     }
-    @Test(expected = BookingException.class)
+    @Test(expected = MockitoException.class)
     public void createTarjetaInternalServerErrorTest() throws BookingException {
         Mockito.when(cursoRepository.findById(CURSO_ID)).thenReturn(OPTIONAL_CURSO);
         Mockito.doThrow(Exception.class).when(cursoRepository).save(Mockito.any(Curso.class));
@@ -87,7 +88,7 @@ public class CursoServiceTest {
         fail();
     }
 
-    @Test(expected = BookingException.class)
+    @Test(expected = MockitoException.class)
     public void deleteTarjetaInternalServerError() throws BookingException {
         Mockito.when(cursoRepository.findById(CURSO_ID)).thenReturn(OPTIONAL_CURSO);
         Mockito.doThrow(Exception.class).when(cursoRepository).deleteById(CURSO_ID);

@@ -1,25 +1,22 @@
 package com.tutofinder.app.controller;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.tutofinder.app.dto.InformeDto;
-import com.tutofinder.app.dto.TarjetaDto;
 import com.tutofinder.app.dto.create.CreateInformeDto;
-import com.tutofinder.app.dto.create.CreateTarjetaDto;
-import com.tutofinder.app.entity.Informe;
 import com.tutofinder.app.exception.BookingException;
 import com.tutofinder.app.response.BookingResponse;
 import com.tutofinder.app.services.InformeService;
-import com.tutofinder.app.services.TarjetaService;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 public class InformeControllerTest {
     private static final String SUCCES_STATUS = "Success";

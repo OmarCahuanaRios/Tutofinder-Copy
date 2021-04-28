@@ -1,14 +1,26 @@
 package com.tutofinder.app.service;
 
-import com.tutofinder.app.dto.AlumnoDto;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
 import com.tutofinder.app.dto.PadreDto;
 import com.tutofinder.app.dto.create.CreatePadreDto;
 import com.tutofinder.app.entity.Alumno;
 import com.tutofinder.app.entity.Padre;
 import com.tutofinder.app.exception.BookingException;
-import com.tutofinder.app.exception.NotFoundException;
 import com.tutofinder.app.repository.PadreRepository;
 import com.tutofinder.app.services.impl.PadreServiceImpl;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -16,15 +28,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class PadreServiceTest {
@@ -81,18 +84,20 @@ public class PadreServiceTest {
 
     public  static  final Padre PADRE = new Padre();
 
-    private static final String PADRE_DELETED = "INFORME_DELETED";
     private static final Optional<Padre> OPTIONAL_PADRE_EMPTY = Optional.empty();
     private static final Optional<Padre> OPTIONAL_PADRE = Optional.of(PADRE);
     public static final List<Alumno> ALUMNNO_LIST = new ArrayList<>();
+    
     @Mock
     PadreRepository padreRepository;
+
     @InjectMocks
     PadreServiceImpl padreServiceImpl;
 
     @Before
     public  void init() throws  BookingException{
         MockitoAnnotations.initMocks(this);
+        PADRE.setId(PADRE_ID);
         PADRE.setNombre(NOMBRE_PADRE);
         PADRE.setApellido(NOMBRE_APELLIDO);
         PADRE.setCorreo(CORREO);
@@ -101,15 +106,13 @@ public class PadreServiceTest {
         PADRE.setAlumnos(ALUMNNO_LIST);
     }
 
-
-
     @Test
-    public void getPadreById() throws BookingException{
+    public void getPadreByIdTest() throws BookingException{
         Mockito.when(padreRepository.findById(PADRE_ID)).thenReturn(OPTIONAL_PADRE);
         padreServiceImpl.getPadreById(PADRE_ID);
     }
     @Test
-    public void  getPadres() throws BookingException {
+    public void  getPadresTest() throws BookingException {
         final Padre padre = new Padre();
         Mockito.when(padreRepository.findAll()).thenReturn(Arrays.asList(padre));
         final List<PadreDto> response = padreServiceImpl.getPadres();
@@ -118,13 +121,13 @@ public class PadreServiceTest {
         assertEquals(response.size(), 1);
     }
     @Test
-    public void createPadre() throws BookingException, IOException {
+    public void createPadreTest() throws BookingException, IOException {
         Mockito.when(padreRepository.findById(PADRE_ID)).thenReturn(OPTIONAL_PADRE);
-        Mockito.doThrow(Exception.class).when(padreRepository).save(Mockito.any(Padre.class));
+        Mockito.when(padreRepository.save(Mockito.any(Padre.class))).thenReturn(PADRE);
         padreServiceImpl.createPadre(CREATE_PADRE_DTO,FILE);
     }
     @Test
-    public void deletePadre() throws BookingException{
+    public void deletePadreTest() throws BookingException{
 
     }
 

@@ -1,10 +1,11 @@
 package com.tutofinder.app.services.impl;
 
-import com.tutofinder.app.dto.PagoDto;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.tutofinder.app.dto.ReservaDto;
 import com.tutofinder.app.dto.create.CreateReservaDto;
 import com.tutofinder.app.entity.Alumno;
-import com.tutofinder.app.entity.Pago;
 import com.tutofinder.app.entity.Reserva;
 import com.tutofinder.app.entity.Tutoria;
 import com.tutofinder.app.exception.BookingException;
@@ -14,12 +15,10 @@ import com.tutofinder.app.repository.AlumnoRepository;
 import com.tutofinder.app.repository.ReservaRepository;
 import com.tutofinder.app.repository.TutoriaRepository;
 import com.tutofinder.app.services.ReservaService;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ReservaServiceImpl implements ReservaService {

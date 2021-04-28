@@ -1,27 +1,26 @@
 package com.tutofinder.app.services.impl;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import com.tutofinder.app.dto.AlumnoDto;
 import com.tutofinder.app.dto.create.CreateAlumnoDto;
 import com.tutofinder.app.entity.Alumno;
 import com.tutofinder.app.entity.Padre;
-import com.tutofinder.app.entity.Tutoria;
 import com.tutofinder.app.exception.BookingException;
 import com.tutofinder.app.exception.InternalServerErrorException;
 import com.tutofinder.app.exception.NotFoundException;
 import com.tutofinder.app.repository.AlumnoRepository;
 import com.tutofinder.app.repository.PadreRepository;
-import com.tutofinder.app.repository.TutoriaRepository;
 import com.tutofinder.app.services.AlumnoService;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class AlumnoServiceImpl implements AlumnoService {

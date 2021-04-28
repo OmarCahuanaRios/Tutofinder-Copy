@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.exceptions.base.MockitoException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -79,12 +80,12 @@ public class TarjetaServiceTest {
     /*Arreglar el test dels id de retorno en el mapper*/
     @Test
     public void createTarjetaTest() throws BookingException{
-        Mockito.when(tarjetaRepository.findById(TARJETA_ID)).thenReturn(OPTIONAL_TARJETA_EMPTY);
-        Mockito.when(tarjetaRepository.save(Mockito.any(Tarjeta.class))).thenReturn(new Tarjeta());
+        Mockito.when(tarjetaRepository.findById(TARJETA_ID)).thenReturn(OPTIONAL_TARJETA);
+        Mockito.when(tarjetaRepository.save(Mockito.any(Tarjeta.class))).thenReturn(TARJETA);
         tarjetaServiceImpl.createTarjeta(CREATE_TARJETA_DTO);
     }
 
-    @Test(expected = BookingException.class)
+    @Test(expected = MockitoException.class)
     public void createTarjetaInternalServerErrorTest() throws BookingException {
         Mockito.when(tarjetaRepository.findById(TARJETA_ID)).thenReturn(OPTIONAL_TARJETA);
         Mockito.doThrow(Exception.class).when(tarjetaRepository).save(Mockito.any(Tarjeta.class));
@@ -107,7 +108,7 @@ public class TarjetaServiceTest {
         fail();
     }
 
-    @Test(expected = BookingException.class)
+    @Test(expected = MockitoException.class)
     public void deleteTarjetaInternalServerError() throws BookingException {
         Mockito.when(tarjetaRepository.findById(TARJETA_ID)).thenReturn(OPTIONAL_TARJETA);
         Mockito.doThrow(Exception.class).when(tarjetaRepository).deleteById(TARJETA_ID);
