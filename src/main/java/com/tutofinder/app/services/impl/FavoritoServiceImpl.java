@@ -73,13 +73,12 @@ public class FavoritoServiceImpl implements FavoritoService {
         final Docente docente = docenteRepository.findById(createFavoritoDto.getDocenteId())
                 .orElseThrow(() -> new NotFoundException("SNOT-404-1","DOCENTE_NOT_FOUND"));
 
-        Favorito favoritoEntity;
-        Favorito favorito = new Favorito();
-        favorito.setPadre(padre);
-        favorito.setDocente(docente);
+        Favorito favoritoEntity = new Favorito();
+        favoritoEntity.setPadre(padre);
+        favoritoEntity.setDocente(docente);
 
         try{
-            favoritoEntity = favoritoRepository.save(favorito);
+            favoritoRepository.save(favoritoEntity);
         }catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }

@@ -42,13 +42,14 @@ public class CursoServiceImpl implements CursoService {
     @Override
     public CursoDto createCurso(CreateCursoDto createCursoDto) throws BookingException {
         Curso cursoEntity = new Curso();
+        Long cursoId;
         cursoEntity.setNombre(createCursoDto.getNombre());
         try {
-            cursoRepository.save(cursoEntity);
+            cursoId = cursoRepository.save(cursoEntity).getId();
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getCursoEntity(cursoEntity.getId()),CursoDto.class);
+        return modelMapper.map(getCursoEntity(cursoId),CursoDto.class);
     }
 
     @Override
@@ -85,6 +86,5 @@ public class CursoServiceImpl implements CursoService {
     private Curso getCursoEntity(Long cursoId) throws BookingException{
         return cursoRepository.findById(cursoId)
                 .orElseThrow(()-> new NotFoundException("SNOT-404-1","CURSO_NOT_FOUND"));
-
     }
 }

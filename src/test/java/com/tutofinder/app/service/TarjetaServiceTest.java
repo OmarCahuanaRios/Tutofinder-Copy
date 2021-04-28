@@ -77,7 +77,6 @@ public class TarjetaServiceTest {
         fail();
     }
 
-    /*Arreglar el test dels id de retorno en el mapper*/
     @Test
     public void createTarjetaTest() throws BookingException{
         Mockito.when(tarjetaRepository.findById(TARJETA_ID)).thenReturn(OPTIONAL_TARJETA);

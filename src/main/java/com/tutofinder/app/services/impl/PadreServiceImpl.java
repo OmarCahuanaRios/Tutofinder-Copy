@@ -42,15 +42,14 @@ public class PadreServiceImpl implements PadreService {
     @Override
     @Transactional
     public PadreDto createPadre(CreatePadreDto createPadreDto, MultipartFile archivo) throws BookingException , IOException {
-        Padre padreEntity;
-        Padre padre = new Padre();
-        padre.setNombre(createPadreDto.getNombre());
-        padre.setApellido(createPadreDto.getApellido());
-        padre.setFoto(archivo.getBytes());
-        padre.setDni(createPadreDto.getDni());
-        padre.setCorreo(createPadreDto.getCorreo());
+        Padre padreEntity = new Padre();
+        padreEntity.setNombre(createPadreDto.getNombre());
+        padreEntity.setApellido(createPadreDto.getApellido());
+        padreEntity.setFoto(archivo.getBytes());
+        padreEntity.setDni(createPadreDto.getDni());
+        padreEntity.setCorreo(createPadreDto.getCorreo());
         try {
-            padreEntity = padreRepository.save(padre);
+            padreRepository.save(padreEntity);
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }

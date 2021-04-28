@@ -51,13 +51,13 @@ public class InformeServiceImpl implements InformeService {
                 .orElseThrow(() -> new NotFoundException("SNOT-404-1","TUTORIA_NOT_FOUND"));
         final Alumno alumno = alumnoRepository.findById(createInformeDto.getAlumnoId())
                 .orElseThrow(() -> new NotFoundException("SNOT-404-1","ALUMNO_NOT_FOUND"));
-        Informe informeEntity;
-        Informe informe = new Informe();
-        informe.setDescripcionInforme(createInformeDto.getDescripcionInforme());
-        informe.setTutoria(tutoria);
-        informe.setAlumno(alumno);
+
+        Informe informeEntity = new Informe();
+        informeEntity.setDescripcionInforme(createInformeDto.getDescripcionInforme());
+        informeEntity.setTutoria(tutoria);
+        informeEntity.setAlumno(alumno);
         try {
-            informeEntity=informeRepository.save(informe);
+            informeRepository.save(informeEntity);
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }

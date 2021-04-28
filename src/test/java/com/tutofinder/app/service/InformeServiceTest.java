@@ -86,7 +86,6 @@ public class InformeServiceTest {
         fail();
     }
 
-    /*Arreglar el test dels id de retorno en el mapper*/
     @Test
     public void createInformeTest() throws BookingException{
         Mockito.when(tutoriaRepository.findById(TUTORIA_ID)).thenReturn(OPTIONAL_TUTORIA);

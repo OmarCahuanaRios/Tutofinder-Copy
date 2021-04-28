@@ -53,17 +53,16 @@ public class AlumnoServiceImpl implements AlumnoService {
         final Padre padre = padreRepository.findById(createAlumnoDto.getPadreId()).
                 orElseThrow(()->new NotFoundException("PADRE_NOT_FOUND","PADRE_NOT_FOUND"));
 
-        Alumno alumnoEntity;
-        Alumno alumno = new Alumno();
-        alumno.setApellido(createAlumnoDto.getApellido());
-        alumno.setGradoEstudio(createAlumnoDto.getGradoEstudio());
-        alumno.setNombre(createAlumnoDto.getNombre());
-        alumno.setFoto(archivo.getBytes());
-        alumno.setPadre(padre);
-        alumno.setDni(createAlumnoDto.getDni());
-        alumno.setCorreo(createAlumnoDto.getCorreo());
+        Alumno alumnoEntity = new Alumno();
+        alumnoEntity.setApellido(createAlumnoDto.getApellido());
+        alumnoEntity.setGradoEstudio(createAlumnoDto.getGradoEstudio());
+        alumnoEntity.setNombre(createAlumnoDto.getNombre());
+        alumnoEntity.setFoto(archivo.getBytes());
+        alumnoEntity.setPadre(padre);
+        alumnoEntity.setDni(createAlumnoDto.getDni());
+        alumnoEntity.setCorreo(createAlumnoDto.getCorreo());
         try {
-            alumnoEntity = alumnoRepository.save(alumno);
+            alumnoRepository.save(alumnoEntity);
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }

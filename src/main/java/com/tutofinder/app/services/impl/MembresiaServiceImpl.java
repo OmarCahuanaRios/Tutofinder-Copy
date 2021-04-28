@@ -58,16 +58,15 @@ public class MembresiaServiceImpl implements MembresiaService {
         if(membresiaRepository.findByDocenteIdAndTarjetaId(docente.getId(),tarjeta.getId()).isPresent()){
             throw new NotFoundException("MEMBRESIA_EXIST","MEMBRESIA_EXIST");
         }
-        Membresia membresiaEntity;
-        Membresia membresia = new Membresia();
-        membresia.setDescripcionMembresia(createMembresiaDto.getDescripcionMembresia());
-        membresia.setFechaExpiracion(createMembresiaDto.getFechaExpiracion());
-        membresia.setTarjeta(tarjeta);
-        membresia.setDocente(docente);
-        membresia.setCostoMembresia(createMembresiaDto.getCostoMembresia());
+        Membresia membresiaEntity = new Membresia();
+        membresiaEntity.setDescripcionMembresia(createMembresiaDto.getDescripcionMembresia());
+        membresiaEntity.setFechaExpiracion(createMembresiaDto.getFechaExpiracion());
+        membresiaEntity.setTarjeta(tarjeta);
+        membresiaEntity.setDocente(docente);
+        membresiaEntity.setCostoMembresia(createMembresiaDto.getCostoMembresia());
 
         try {
-            membresiaEntity = membresiaRepository.save(membresia);
+            membresiaRepository.save(membresiaEntity);
         }catch (Exception ex){
             throw  new InternalServerErrorException("INTERNAL_ERROR","INTERNAL_ERROR");
         }

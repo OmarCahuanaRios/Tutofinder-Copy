@@ -130,11 +130,4 @@ public class PadreServiceTest {
     public void deletePadreTest() throws BookingException{
 
     }
-
-
-
-
-
-
-
 }

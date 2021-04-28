@@ -3,6 +3,7 @@ package com.tutofinder.app.service;
 import com.tutofinder.app.dto.CursoDto;
 import com.tutofinder.app.dto.create.CreateCursoDto;
 import com.tutofinder.app.entity.Curso;
+import com.tutofinder.app.entity.Tarjeta;
 import com.tutofinder.app.exception.BookingException;
 import com.tutofinder.app.repository.CursoRepository;
 import com.tutofinder.app.services.impl.CursoServiceImpl;
@@ -48,6 +49,13 @@ public class CursoServiceTest {
 
         CREATE_CURSO_DTO.setNombre(NOMBRE_CURSO);
 
+    }
+
+    @Test
+    public void createCursoTest() throws BookingException{
+        Mockito.when(cursoRepository.findById(CURSO_ID)).thenReturn(OPTIONAL_CURSO);
+        Mockito.when(cursoRepository.save(Mockito.any(Curso.class))).thenReturn(CURSO);
+        cursoServiceImpl.createCurso(CREATE_CURSO_DTO);
     }
 
     @Test

@@ -70,19 +70,18 @@ public class DocenteServiceImpl implements DocenteService {
 
     @Override
     public DocenteDto createDocente(CreateDocenteDto createDocenteDto, MultipartFile archivo) throws BookingException, IOException {
-        Docente docenteEntity;
-        Docente docente = new Docente();
-        docente.setNombre(createDocenteDto.getNombre());
-        docente.setApellido(createDocenteDto.getApellido());
-        docente.setDni(createDocenteDto.getDni());
-        docente.setMembresia(false);
-        docente.setCostoHora(createDocenteDto.getCostoHora());
-        docente.setFoto(archivo.getBytes());
-        docente.setDomicilio(createDocenteDto.getDomicilio());
-        docente.setCorreo(createDocenteDto.getCorreo());
-        docente.setNumeroCuenta(createDocenteDto.getNumeroCuenta());
+        Docente docenteEntity = new Docente();
+        docenteEntity.setNombre(createDocenteDto.getNombre());
+        docenteEntity.setApellido(createDocenteDto.getApellido());
+        docenteEntity.setDni(createDocenteDto.getDni());
+        docenteEntity.setMembresia(false);
+        docenteEntity.setCostoHora(createDocenteDto.getCostoHora());
+        docenteEntity.setFoto(archivo.getBytes());
+        docenteEntity.setDomicilio(createDocenteDto.getDomicilio());
+        docenteEntity.setCorreo(createDocenteDto.getCorreo());
+        docenteEntity.setNumeroCuenta(createDocenteDto.getNumeroCuenta());
         try {
-            docenteEntity=docenteRepository.save(docente);
+            docenteRepository.save(docenteEntity);
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
