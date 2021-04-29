@@ -40,7 +40,7 @@ public class AlumnoControllerTest {
     CreateAlumnoDto CREATE_ALUMNO_DTO = new CreateAlumnoDto();
     public static final List<AlumnoDto> ALUMNO_DTO_LIST = new ArrayList<>();
 
-    MultipartFile multipartFile = new MockMultipartFile("name",
+    MultipartFile MULTIPARTFILE = new MockMultipartFile("name",
             "originalFileName", "contentType", (byte[]) null);
 
     @Mock
@@ -62,13 +62,13 @@ public class AlumnoControllerTest {
         CREATE_ALUMNO_DTO.setPadreId(PADRE_ID_ALUMNO);
 
         Mockito.when(alumnoService.getAlumnoById(ALUMNO_ID)).thenReturn(ALUMNO_DTO);
-        Mockito.when(alumnoService.createAlumno(CREATE_ALUMNO_DTO,multipartFile)).thenReturn(ALUMNO_DTO);
+        Mockito.when(alumnoService.createAlumno(CREATE_ALUMNO_DTO,MULTIPARTFILE)).thenReturn(ALUMNO_DTO);
         Mockito.when(alumnoService.deleteAlumno(ALUMNO_ID)).thenReturn(ALUMNO_DELETED);
     }
 
     @Test
     public void createAlumnoTest() throws BookingException, IOException {
-        BookingResponse<AlumnoDto> response = alumnoController.createAlumno(CREATE_ALUMNO_DTO,multipartFile);
+        BookingResponse<AlumnoDto> response = alumnoController.createAlumno(CREATE_ALUMNO_DTO,MULTIPARTFILE);
         assertEquals(response.getStatus(), SUCCES_STATUS);
         assertEquals(response.getCode(), SUCCES_CODE);
         assertEquals(response.getMessage(), OK);
