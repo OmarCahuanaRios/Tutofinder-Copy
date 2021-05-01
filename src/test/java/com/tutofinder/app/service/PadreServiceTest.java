@@ -128,6 +128,7 @@ public class PadreServiceTest {
     }
     @Test
     public void deletePadreTest() throws BookingException{
-
+        Mockito.when(padreRepository.findById(PADRE_ID)).thenReturn(OPTIONAL_PADRE);
+        padreServiceImpl.deletePadre(PADRE_ID);
     }
 }
