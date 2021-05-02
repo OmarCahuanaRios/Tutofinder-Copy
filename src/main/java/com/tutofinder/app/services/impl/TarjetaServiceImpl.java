@@ -30,6 +30,13 @@ public class TarjetaServiceImpl implements TarjetaService {
     }
 
     @Override
+    public List<TarjetaDto> getTarjetasByNombres(String nombre) throws BookingException {
+        final List<Tarjeta> tarjetasEntity = tarjetaRepository.findByNombrePoseedor(nombre);
+        return tarjetasEntity.stream().map(service->modelMapper.map(service,TarjetaDto.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<TarjetaDto> getTarjetas() throws BookingException {
         final List<Tarjeta> tarjetasEntity = tarjetaRepository.findAll();
         return tarjetasEntity.stream().map(service->modelMapper.map(service,TarjetaDto.class))

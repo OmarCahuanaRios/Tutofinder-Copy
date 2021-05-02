@@ -12,7 +12,6 @@ import java.util.Optional;
 public interface TarjetaRepository extends JpaRepository<Tarjeta,Long> {
     Optional<Tarjeta> findById(Long id);
 
-    Optional<Tarjeta> findByNombrePoseedorAndNumeroTarjeta(String nombre,String numero);
 
     @Query("select t from Tarjeta t where upper(t.nombrePoseedor) like upper(concat('%',?1,'%'))")
     List<Tarjeta> findByNombrePoseedor(String nombre);
