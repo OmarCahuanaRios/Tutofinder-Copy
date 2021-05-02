@@ -32,6 +32,12 @@ public class CursoServiceImpl implements CursoService {
     }
 
     @Override
+    public CursoDto getCursoByNombre(String nombre) throws BookingException {
+        Optional<Curso> cursoEntity = cursoRepository.findByNombre(nombre);
+        return modelMapper.map(cursoEntity,CursoDto.class);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<CursoDto> getCursos() throws BookingException {
         final List<Curso> cursosEntity= cursoRepository.findAll();

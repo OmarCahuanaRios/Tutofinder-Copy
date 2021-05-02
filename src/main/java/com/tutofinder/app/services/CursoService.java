@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface CursoService {
     CursoDto getCursoById(Long cursoId) throws BookingException;
+    CursoDto getCursoByNombre(String nombre) throws BookingException;
     List<CursoDto> getCursos() throws BookingException;
     CursoDto createCurso(CreateCursoDto createCursoDto) throws BookingException;
     CursoDto updateCurso(CreateCursoDto createCursoDto, Long cursoId) throws BookingException;
