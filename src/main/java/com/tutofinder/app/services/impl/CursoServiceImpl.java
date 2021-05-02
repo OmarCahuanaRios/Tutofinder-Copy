@@ -33,8 +33,9 @@ public class CursoServiceImpl implements CursoService {
 
     @Override
     public CursoDto getCursoByNombre(String nombre) throws BookingException {
-        Optional<Curso> cursoEntity = cursoRepository.findByNombre(nombre);
-        return modelMapper.map(cursoEntity,CursoDto.class);
+        final Curso curso = cursoRepository.findByNombre(nombre)
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1","NAME_CURSO_NOT_FOUND"));
+        return modelMapper.map(curso,CursoDto.class);
     }
 
     @Override

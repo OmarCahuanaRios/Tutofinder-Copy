@@ -19,10 +19,17 @@ public class CursoController {
     CursoService cursoService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/curso/{cursoId}")
+    @GetMapping("/curso/id/{cursoId}")
     public BookingResponse<CursoDto> getCursoById(@PathVariable Long cursoId)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 cursoService.getCursoById(cursoId));
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/curso/nombre/{nombre}")
+    public BookingResponse<CursoDto> getCursoByNombre(@PathVariable String nombre)throws BookingException{
+        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+                cursoService.getCursoByNombre(nombre));
     }
 
     @ResponseStatus(HttpStatus.OK)
