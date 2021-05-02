@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TarjetaService {
     TarjetaDto getTarjetaById(Long tarjetaId) throws BookingException;
-    List<TarjetaDto> getTarjetasByNombres(String nombre) throws BookingException;
+    List<TarjetaDto> getTarjetasByNombre(String nombre) throws BookingException;
     List<TarjetaDto> getTarjetas() throws BookingException;
     TarjetaDto createTarjeta(CreateTarjetaDto createTarjetaDto) throws BookingException;
     TarjetaDto updateTarjeta(CreateTarjetaDto createTarjetaDto, Long tarjetaId) throws BookingException;
