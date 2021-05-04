@@ -11,6 +11,7 @@ public class PagoDto {
     private String descripcionPago;
     private Long padreId;
     private Long tarjetaId;
+    private Long tutoriaId;
     private double costoPago;
     private ReservaDto reserva;
 }

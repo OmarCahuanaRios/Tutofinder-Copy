@@ -14,7 +14,6 @@ import com.tutofinder.app.exception.InternalServerErrorException;
 import com.tutofinder.app.exception.NotFoundException;
 import com.tutofinder.app.repository.CursoRepository;
 import com.tutofinder.app.repository.DocenteRepository;
-import com.tutofinder.app.repository.InformeRepository;
 import com.tutofinder.app.repository.TutoriaRepository;
 import com.tutofinder.app.services.TutoriaService;
 
@@ -37,8 +36,6 @@ public class TutoriaServiceImpl implements TutoriaService {
     @Autowired
     DocenteRepository docenteRepository;
 
-    @Autowired
-    InformeRepository informeRepository;
 
     public static final ModelMapper modelMapper = new ModelMapper();
 
