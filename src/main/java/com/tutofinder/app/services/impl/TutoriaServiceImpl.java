@@ -12,11 +12,9 @@ import com.tutofinder.app.entity.Tutoria;
 import com.tutofinder.app.exception.BookingException;
 import com.tutofinder.app.exception.InternalServerErrorException;
 import com.tutofinder.app.exception.NotFoundException;
-import com.tutofinder.app.repository.AlumnoRepository;
 import com.tutofinder.app.repository.CursoRepository;
 import com.tutofinder.app.repository.DocenteRepository;
 import com.tutofinder.app.repository.InformeRepository;
-import com.tutofinder.app.repository.PagoRepository;
 import com.tutofinder.app.repository.TutoriaRepository;
 import com.tutofinder.app.services.TutoriaService;
 
@@ -37,13 +35,7 @@ public class TutoriaServiceImpl implements TutoriaService {
     CursoRepository cursoRepository;
 
     @Autowired
-    AlumnoRepository alumnoRepository;
-
-    @Autowired
     DocenteRepository docenteRepository;
-
-    @Autowired
-    PagoRepository pagoRepository;
 
     @Autowired
     InformeRepository informeRepository;
