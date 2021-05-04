@@ -9,7 +9,6 @@ public class CreatePagoDto {
     private String descripcionPago;
     private Long padreId;
     private Long tarjetaId;
-    private Long tutoriaId;
     private double costoPago;
     private Long reservaId;
 }
