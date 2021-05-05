@@ -52,8 +52,8 @@ public class AlumnoServiceImpl implements AlumnoService {
     public AlumnoDto createAlumno(CreateAlumnoDto createAlumnoDto, MultipartFile archivo) throws BookingException, IOException {
         final Padre padre = padreRepository.findById(createAlumnoDto.getPadreId()).
                 orElseThrow(()->new NotFoundException("PADRE_NOT_FOUND","PADRE_NOT_FOUND"));
-
         Alumno alumnoEntity = new Alumno();
+        Long id;
         alumnoEntity.setApellido(createAlumnoDto.getApellido());
         alumnoEntity.setGradoEstudio(createAlumnoDto.getGradoEstudio());
         alumnoEntity.setNombre(createAlumnoDto.getNombre());
@@ -62,11 +62,11 @@ public class AlumnoServiceImpl implements AlumnoService {
         alumnoEntity.setDni(createAlumnoDto.getDni());
         alumnoEntity.setCorreo(createAlumnoDto.getCorreo());
         try {
-            alumnoRepository.save(alumnoEntity);
+            id = alumnoRepository.save(alumnoEntity).getId();
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getAlumnoEntity(alumnoEntity.getId()), AlumnoDto.class);
+        return modelMapper.map(getAlumnoEntity(id), AlumnoDto.class);
     }
 
     @Override
@@ -79,6 +79,7 @@ public class AlumnoServiceImpl implements AlumnoService {
             throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
         }
         Alumno alumnoEntity = alumno.get();
+        Long id;
         alumnoEntity.setNombre(createAlumnoDto.getNombre());
         alumnoEntity.setApellido(createAlumnoDto.getApellido());
         alumnoEntity.setGradoEstudio(createAlumnoDto.getGradoEstudio());
@@ -87,12 +88,12 @@ public class AlumnoServiceImpl implements AlumnoService {
         alumnoEntity.setDni(createAlumnoDto.getDni());
         alumnoEntity.setCorreo(createAlumnoDto.getCorreo());
         try {
-            alumnoRepository.save(alumnoEntity);
+            id = alumnoRepository.save(alumnoEntity).getId();
         }
         catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getAlumnoEntity(alumnoEntity.getId()), AlumnoDto.class);
+        return modelMapper.map(getAlumnoEntity(id), AlumnoDto.class);
     }
 
     @Override

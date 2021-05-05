@@ -86,6 +86,7 @@ public class InformeServiceTest {
         fail();
     }
 
+
     @Test
     public void createInformeTest() throws BookingException{
         Mockito.when(tutoriaRepository.findById(TUTORIA_ID)).thenReturn(OPTIONAL_TUTORIA);

@@ -71,6 +71,7 @@ public class DocenteServiceImpl implements DocenteService {
     @Override
     public DocenteDto createDocente(CreateDocenteDto createDocenteDto, MultipartFile archivo) throws BookingException, IOException {
         Docente docenteEntity = new Docente();
+        Long id;
         docenteEntity.setNombre(createDocenteDto.getNombre());
         docenteEntity.setApellido(createDocenteDto.getApellido());
         docenteEntity.setDni(createDocenteDto.getDni());
@@ -81,11 +82,11 @@ public class DocenteServiceImpl implements DocenteService {
         docenteEntity.setCorreo(createDocenteDto.getCorreo());
         docenteEntity.setNumeroCuenta(createDocenteDto.getNumeroCuenta());
         try {
-            docenteRepository.save(docenteEntity);
+            id = docenteRepository.save(docenteEntity).getId();
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getDocenteEntity(docenteEntity.getId()),DocenteDto.class);
+        return modelMapper.map(getDocenteEntity(id),DocenteDto.class);
     }
 
     @Override
@@ -95,6 +96,7 @@ public class DocenteServiceImpl implements DocenteService {
             throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
         }
         Docente docenteEntity = docente.get();
+        Long id;
         docenteEntity.setNombre(createDocenteDto.getNombre());
         docenteEntity.setApellido(createDocenteDto.getApellido());
         docenteEntity.setDni(createDocenteDto.getDni());
@@ -104,11 +106,11 @@ public class DocenteServiceImpl implements DocenteService {
         docenteEntity.setCorreo(createDocenteDto.getCorreo());
         docenteEntity.setNumeroCuenta(createDocenteDto.getNumeroCuenta());
         try {
-            docenteRepository.save(docenteEntity);
+            id = docenteRepository.save(docenteEntity).getId();
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getDocenteEntity(docenteEntity.getId()),DocenteDto.class);
+        return modelMapper.map(getDocenteEntity(id),DocenteDto.class);
     }
 
     @Override

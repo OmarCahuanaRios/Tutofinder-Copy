@@ -43,17 +43,18 @@ public class PadreServiceImpl implements PadreService {
     @Transactional
     public PadreDto createPadre(CreatePadreDto createPadreDto, MultipartFile archivo) throws BookingException , IOException {
         Padre padreEntity = new Padre();
+        Long id;
         padreEntity.setNombre(createPadreDto.getNombre());
         padreEntity.setApellido(createPadreDto.getApellido());
         padreEntity.setFoto(archivo.getBytes());
         padreEntity.setDni(createPadreDto.getDni());
         padreEntity.setCorreo(createPadreDto.getCorreo());
         try {
-            padreRepository.save(padreEntity);
+            id = padreRepository.save(padreEntity).getId();
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getPadreEntity(padreEntity.getId()), PadreDto.class);
+        return modelMapper.map(getPadreEntity(id), PadreDto.class);
     }
 
     @Override
@@ -64,17 +65,18 @@ public class PadreServiceImpl implements PadreService {
             throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
         }
         Padre padreEntity = padre.get();
+        Long id;
         padreEntity.setNombre(createPadreDto.getNombre());
         padreEntity.setApellido(createPadreDto.getApellido());
         padreEntity.setFoto(archivo.getBytes());
         padreEntity.setDni(createPadreDto.getDni());
         padreEntity.setCorreo(createPadreDto.getCorreo());
         try {
-            padreRepository.save(padreEntity);
+            id = padreRepository.save(padreEntity).getId();
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getPadreEntity(padreEntity.getId()), PadreDto.class);
+        return modelMapper.map(getPadreEntity(id), PadreDto.class);
     }
 
     @Override

@@ -74,15 +74,16 @@ public class FavoritoServiceImpl implements FavoritoService {
                 .orElseThrow(() -> new NotFoundException("SNOT-404-1","DOCENTE_NOT_FOUND"));
 
         Favorito favoritoEntity = new Favorito();
+        Long id;
         favoritoEntity.setPadre(padre);
         favoritoEntity.setDocente(docente);
 
         try{
-            favoritoRepository.save(favoritoEntity);
+            id = favoritoRepository.save(favoritoEntity).getId();
         }catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getFavoritoEntity(favoritoEntity.getId()),FavoritoDto.class);
+        return modelMapper.map(getFavoritoEntity(id),FavoritoDto.class);
     }
 
     @Override
@@ -99,15 +100,16 @@ public class FavoritoServiceImpl implements FavoritoService {
             throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
         }
         Favorito favoritoEntity = favorito.get();
+        Long id;
         favoritoEntity.setDocente(docente);
         favoritoEntity.setPadre(padre);
 
         try{
-            favoritoRepository.save(favoritoEntity);
+            id = favoritoRepository.save(favoritoEntity).getId();
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getFavoritoEntity(favoritoEntity.getId()),FavoritoDto.class);
+        return modelMapper.map(getFavoritoEntity(id),FavoritoDto.class);
     }
 
     @Override

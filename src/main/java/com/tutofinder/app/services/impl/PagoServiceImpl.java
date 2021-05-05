@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class PagoServiceImpl implements PagoService{
+public class PagoServiceImpl implements PagoService {
 
     @Autowired
     PagoRepository pagoRepository;
@@ -37,79 +37,83 @@ public class PagoServiceImpl implements PagoService{
     @Override
     @Transactional(readOnly = true)
     public PagoDto getPagoById(Long pagoId) throws BookingException {
-        return modelMapper.map(getPagoEntity(pagoId),PagoDto.class);
+        return modelMapper.map(getPagoEntity(pagoId), PagoDto.class);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<PagoDto> getPagos() throws BookingException {
         List<Pago> pagoEntity = pagoRepository.findAll();
-        return pagoEntity.stream().map(service->modelMapper.map(service,PagoDto.class)).collect(Collectors.toList());
+        return pagoEntity.stream().map(service -> modelMapper.map(service, PagoDto.class)).collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public PagoDto createPago(CreatePagoDto createPagoDto) throws BookingException {
         final Tarjeta tarjeta = tarjetaRepository.findById(createPagoDto.getTarjetaId())
-                .orElseThrow(()-> new NotFoundException("SNOT-404-1","TARJETA_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "TARJETA_NOT_FOUND"));
         final Padre padre = padreRepository.findById(createPagoDto.getPadreId())
-                .orElseThrow(()-> new NotFoundException("SNOT-404-1","PADRE_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "PADRE_NOT_FOUND"));
         final Reserva reserva = reservaRepository.findById(createPagoDto.getPadreId())
-                .orElseThrow(()-> new NotFoundException("SNOT-404-1","RESERVA_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "RESERVA_NOT_FOUND"));
 
         Pago pagoEntity = new Pago();
+        Long id;
         pagoEntity.setDescripcionPago(createPagoDto.getDescripcionPago());
         pagoEntity.setCostoPago(createPagoDto.getCostoPago());
         pagoEntity.setPadre(padre);
         pagoEntity.setReserva(reserva);
         pagoEntity.setTarjeta(tarjeta);
         try {
-            pagoRepository.save(pagoEntity);
-        } catch (final Exception e){
-            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
+            id = pagoRepository.save(pagoEntity).getId();
+        } catch (final Exception e) {
+            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR", "INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getPagoEntity(pagoEntity.getId()),PagoDto.class);
+        return modelMapper.map(getPagoEntity(id), PagoDto.class);
     }
-    /*No necesario*/
+
+    /* No necesario */
     @Override
     @Transactional
     public PagoDto updatePago(CreatePagoDto createPagoDto, Long pagoId) throws BookingException {
         final Tarjeta tarjeta = tarjetaRepository.findById(createPagoDto.getTarjetaId())
-                .orElseThrow(()-> new NotFoundException("SNOT-404-1","TARJETA_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "TARJETA_NOT_FOUND"));
         final Padre padre = padreRepository.findById(createPagoDto.getPadreId())
-                .orElseThrow(()-> new NotFoundException("SNOT-404-1","PADRE_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "PADRE_NOT_FOUND"));
+        final Reserva reserva = reservaRepository.findById(createPagoDto.getPadreId())
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "RESERVA_NOT_FOUND"));
 
         Optional<Pago> pago = pagoRepository.findById(pagoId);
-        if(!pago.isPresent()){
-            throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
+        if (!pago.isPresent()) {
+            throw new NotFoundException("ID_NOT_FOOUND", "ID_NOT_FOUND");
         }
         Pago pagoEntity = pago.get();
+        Long id;
         pagoEntity.setDescripcionPago(createPagoDto.getDescripcionPago());
         pagoEntity.setCostoPago(createPagoDto.getCostoPago());
         pagoEntity.setPadre(padre);
+        pagoEntity.setReserva(reserva);
         pagoEntity.setTarjeta(tarjeta);
         try {
-            pagoRepository.save(pagoEntity);
-        } catch (final Exception e){
-            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
+            id = pagoRepository.save(pagoEntity).getId();
+        } catch (final Exception e) {
+            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR", "INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getPagoEntity(pagoEntity.getId()),PagoDto.class);
+        return modelMapper.map(getPagoEntity(id), PagoDto.class);
     }
 
     @Override
     public String deletePago(Long pagoId) throws BookingException {
-        pagoRepository.findById(pagoId)
-                .orElseThrow(()-> new NotFoundException("SNOT-404-1","PAGO_NOT_FOUND"));
+        pagoRepository.findById(pagoId).orElseThrow(() -> new NotFoundException("SNOT-404-1", "PAGO_NOT_FOUND"));
         try {
             pagoRepository.deleteById(pagoId);
-        } catch (final Exception e){
-            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
+        } catch (final Exception e) {
+            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR", "INTERNAL_SERVER_ERROR");
         }
         return "PAGO_DELETED";
     }
 
-    public Pago getPagoEntity(Long pagoId) throws BookingException{
-        return pagoRepository.findById(pagoId)
-                .orElseThrow(()-> new NotFoundException("SNOT-404-1","PAGO_NOT_FOUND"));
+    public Pago getPagoEntity(Long pagoId) throws BookingException {
+        return pagoRepository.findById(pagoId).orElseThrow(() -> new NotFoundException("SNOT-404-1", "PAGO_NOT_FOUND"));
     }
 }
