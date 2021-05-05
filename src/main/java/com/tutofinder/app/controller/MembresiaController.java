@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin({"http://localhost:4200"})
 @RestController
 @RequestMapping(path = "/tutofinder")
 public class MembresiaController {
