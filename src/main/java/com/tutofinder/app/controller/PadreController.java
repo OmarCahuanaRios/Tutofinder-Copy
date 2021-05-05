@@ -25,14 +25,14 @@ public class PadreController {
     PadreService padreService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/padre/{padreId}")
+    @GetMapping("/padres/{padreId}")
     public BookingResponse<PadreDto> getPadreById(@PathVariable Long padreId) throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 padreService.getPadreById(padreId));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/padre/{padreId}/img")
+    @GetMapping("/padres/{padreId}/img")
     public ResponseEntity<?> getFoto(@PathVariable Long padreId) throws BookingException {
         PadreDto optionalPadre = padreService.getPadreById(padreId);
         Resource imagen = new ByteArrayResource(optionalPadre.getFoto());
@@ -47,20 +47,20 @@ public class PadreController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/padre")
+    @PostMapping("/padres")
     public BookingResponse<PadreDto> createPadre(@Valid CreatePadreDto createPadreDto, @RequestParam MultipartFile archivo)throws BookingException, IOException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 padreService.createPadre(createPadreDto,archivo));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/padre/{padreId}")
+    @PutMapping("/padres/{padreId}")
     public BookingResponse<PadreDto> updatePadre(@Valid CreatePadreDto createPadreDto,@PathVariable Long padreId,@RequestParam MultipartFile archivo)throws BookingException, IOException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                padreService.updatePadre(createPadreDto,padreId,archivo));
     }
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/padre/{padreId}")
+    @DeleteMapping("/padres/{padreId}")
     public BookingResponse<String> deletePadre(@PathVariable Long padreId) throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 padreService.deletePadre(padreId));

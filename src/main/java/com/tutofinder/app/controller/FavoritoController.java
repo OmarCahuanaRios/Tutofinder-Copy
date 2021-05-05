@@ -21,7 +21,7 @@ public class FavoritoController {
     FavoritoService favoritoService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/favorito/{favoritoId}")
+    @GetMapping("/favoritos/{favoritoId}")
     public BookingResponse<FavoritoDto> getFavoritoById(@PathVariable Long favoritoId) throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 favoritoService.getFavoritoById(favoritoId));
@@ -48,20 +48,20 @@ public class FavoritoController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/favorito")
+    @PostMapping("/favoritos")
     public BookingResponse<FavoritoDto> createFavorito(@RequestBody @Valid CreateFavoritoDto createFavoritoDto)throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 favoritoService.createFavorito(createFavoritoDto));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/favorito/{favoritoId}")
+    @PutMapping("/favoritos/{favoritoId}")
     public BookingResponse<FavoritoDto> updateFavorito(@PathVariable Long favoritoId, @RequestBody @Valid CreateFavoritoDto createFavoritoDto)throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 favoritoService.updateFavorito(createFavoritoDto,favoritoId));
     }
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/favorito/{favoritoId}")
+    @DeleteMapping("/favoritos/{favoritoId}")
     public BookingResponse<String> deleteFavorito(@PathVariable Long favoritoId) throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 favoritoService.deleteFavorito(favoritoId));

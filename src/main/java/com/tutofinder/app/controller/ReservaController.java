@@ -20,7 +20,7 @@ public class ReservaController {
     ReservaService reservaService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/reserva/{reservaId}")
+    @GetMapping("/reservas/{reservaId}")
     public BookingResponse<ReservaDto> getReservaById(@PathVariable Long reservaId) throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 reservaService.getReservaById(reservaId));
@@ -34,7 +34,7 @@ public class ReservaController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/reserva")
+    @PostMapping("/reservas")
     public BookingResponse<ReservaDto> createReserva(@RequestBody @Valid CreateReservaDto createreservaDto)throws BookingException, IOException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 reservaService.createReserva(createreservaDto));
@@ -42,7 +42,7 @@ public class ReservaController {
 
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/reserva/{reservaId}")
+    @DeleteMapping("/reservas/{reservaId}")
     public BookingResponse<String> deleteReserva(@PathVariable Long reservaId) throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 reservaService.deleteReserva(reservaId));

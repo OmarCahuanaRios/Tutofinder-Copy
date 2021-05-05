@@ -20,7 +20,7 @@ public class MembresiaController {
     MembresiaService membresiaService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/membresia/{membresiaId}")
+    @GetMapping("/membresias/{membresiaId}")
     public BookingResponse<MembresiaDto> getMembresiaById(@PathVariable Long membresiaId) throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 membresiaService.getMembresiaById(membresiaId));
@@ -34,21 +34,21 @@ public class MembresiaController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/membresia")
+    @PostMapping("/membresias")
     public BookingResponse<MembresiaDto> createMembresia(@RequestBody @Valid CreateMembresiaDto createMembresiaDto)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 membresiaService.createMembresia(createMembresiaDto));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/membresia/{membresiaId}")
+    @PutMapping("/membresias/{membresiaId}")
     public BookingResponse<MembresiaDto> updateMembresia(@PathVariable Long membresiaId,@RequestBody @Valid CreateMembresiaDto createMembresiaDto)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 membresiaService.updateMembresia(createMembresiaDto,membresiaId));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/membresia/{membresiaId}")
+    @DeleteMapping("/membresias/{membresiaId}")
     public BookingResponse<String> deleteMembresia(@PathVariable Long membresiaId)throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 membresiaService.deleteMembresia(membresiaId));

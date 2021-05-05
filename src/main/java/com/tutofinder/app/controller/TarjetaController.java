@@ -20,7 +20,7 @@ public class TarjetaController {
     TarjetaService tarjetaService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/tarjeta/{tarjetaId}")
+    @GetMapping("/tarjetas/{tarjetaId}")
     public BookingResponse<TarjetaDto> getTarjetaById(@PathVariable Long tarjetaId)throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 tarjetaService.getTarjetaById(tarjetaId));
@@ -41,21 +41,21 @@ public class TarjetaController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/tarjeta")
+    @PostMapping("/tarjetas")
     public BookingResponse<TarjetaDto> createTarjeta(@RequestBody @Valid CreateTarjetaDto createTarjetaDto)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 tarjetaService.createTarjeta(createTarjetaDto));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/tarjeta/{tarjetaId}")
+    @PutMapping("/tarjetas/{tarjetaId}")
     public BookingResponse<TarjetaDto> updateTarjeta(@PathVariable Long tarjetaId,@RequestBody @Valid CreateTarjetaDto createTarjetaDto)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 tarjetaService.updateTarjeta(createTarjetaDto,tarjetaId));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/tarjeta/{tarjetaId}")
+    @DeleteMapping("/tarjetas/{tarjetaId}")
     public BookingResponse<String> deleteTarjeta(@PathVariable Long tarjetaId)throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 tarjetaService.deleteTarjeta(tarjetaId));

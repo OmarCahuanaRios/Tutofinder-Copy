@@ -19,7 +19,7 @@ public class InformeController {
     InformeService informeService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/informe/{informeId}")
+    @GetMapping("/informes/{informeId}")
     public BookingResponse<InformeDto> getInformeById(@PathVariable Long informeId)throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 informeService.getInformeById(informeId));
@@ -33,21 +33,21 @@ public class InformeController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/informe")
+    @PostMapping("/informes")
     public BookingResponse<InformeDto> createInforme(@RequestBody @Valid CreateInformeDto createInformeDto)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 informeService.createInforme(createInformeDto));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/informe/{informeId}")
+    @PutMapping("/informes/{informeId}")
     public BookingResponse<InformeDto> updateInforme(@PathVariable Long informeId,@RequestBody @Valid CreateInformeDto createInformeDto)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 informeService.updateInforme(createInformeDto,informeId));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/informe/{informeId}")
+    @DeleteMapping("/informes/{informeId}")
     public BookingResponse<String> deleteInforme(@PathVariable Long informeId)throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 informeService.deleteInforme(informeId));

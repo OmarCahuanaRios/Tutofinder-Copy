@@ -19,14 +19,14 @@ public class CursoController {
     CursoService cursoService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/curso/id/{cursoId}")
+    @GetMapping("/cursos/id/{cursoId}")
     public BookingResponse<CursoDto> getCursoById(@PathVariable Long cursoId)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 cursoService.getCursoById(cursoId));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/curso/nombre/{nombre}")
+    @GetMapping("/cursos/nombre/{nombre}")
     public BookingResponse<CursoDto> getCursoByNombre(@PathVariable String nombre)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 cursoService.getCursoByNombre(nombre));
@@ -40,21 +40,21 @@ public class CursoController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/curso")
+    @PostMapping("/cursos")
     public BookingResponse<CursoDto> createCurso(@RequestBody @Valid CreateCursoDto createCursoDto)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 cursoService.createCurso(createCursoDto));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/curso/{cursoId}")
+    @PutMapping("/cursos/{cursoId}")
     public BookingResponse<CursoDto> updateCurso(@PathVariable Long cursoId,@RequestBody @Valid CreateCursoDto createCursoDto)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 cursoService.updateCurso(createCursoDto,cursoId));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/curso/{cursoId}")
+    @DeleteMapping("/cursos/{cursoId}")
     public BookingResponse<String> deleteCurso(@PathVariable Long cursoId)throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 cursoService.deleteCurso(cursoId));

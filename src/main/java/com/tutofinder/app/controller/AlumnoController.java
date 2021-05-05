@@ -25,14 +25,14 @@ public class AlumnoController {
     AlumnoService alumnoService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/alumno/{alumnoId}")
+    @GetMapping("/alumnos/{alumnoId}")
     BookingResponse<AlumnoDto> getAlumnoById(@PathVariable Long alumnoId)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 alumnoService.getAlumnoById(alumnoId));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/alumno/{alumnoId}/img")
+    @GetMapping("/alumnos/{alumnoId}/img")
     public ResponseEntity<?> getFoto(@PathVariable Long alumnoId) throws BookingException {
         AlumnoDto optionalAlumno = alumnoService.getAlumnoById(alumnoId);
         Resource imagen = new ByteArrayResource(optionalAlumno.getFoto());
@@ -47,20 +47,20 @@ public class AlumnoController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/alumno")
+    @PostMapping("/alumnos")
     BookingResponse<AlumnoDto> createAlumno(@Valid CreateAlumnoDto createAlumnoDto , @RequestParam MultipartFile archivo)throws BookingException, IOException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 alumnoService.createAlumno(createAlumnoDto,archivo));
     }
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/alumno/{alumnoId}")
+    @PutMapping("/alumnos/{alumnoId}")
     BookingResponse<AlumnoDto> updateAlumno(@PathVariable Long alumnoId , @Valid CreateAlumnoDto createAlumnoDto , @RequestParam MultipartFile archivo)throws BookingException , IOException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 alumnoService.updateAlumno(createAlumnoDto,alumnoId,archivo));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/alumno/{alumnoId}")
+    @DeleteMapping("/alumnos/{alumnoId}")
     BookingResponse<String> deleteAlumno(@PathVariable Long alumnoId)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 alumnoService.deleteAlumno(alumnoId));

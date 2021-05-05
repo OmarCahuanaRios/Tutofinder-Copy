@@ -22,7 +22,7 @@ public class TutoriaController {
     TutoriaService tutoriaService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/tutoria/{tutoriaId}")
+    @GetMapping("/tutorias/{tutoriaId}")
     public BookingResponse<TutoriaDto> getTutoriaById(@PathVariable Long tutoriaId) throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 tutoriaService.getTutoriaById(tutoriaId));
@@ -42,20 +42,20 @@ public class TutoriaController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/tutoria")
+    @PostMapping("/tutorias")
     public BookingResponse<TutoriaDto> createTutoria(@RequestBody @Valid CreateTutoriaDto createTutoriaDto)throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 tutoriaService.createTutoria(createTutoriaDto));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/tutoria/{tutoriaId}")
+    @PutMapping("/tutorias/{tutoriaId}")
     public BookingResponse<TutoriaDto> updateTutoria(@PathVariable Long tutoriaId, @RequestBody @Valid CreateTutoriaDto createTutoriaDto)throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 tutoriaService.updateTutoria(createTutoriaDto,tutoriaId));
     }
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/tutoria/{tutoriaId}")
+    @DeleteMapping("/tutorias/{tutoriaId}")
     public BookingResponse<String> deleteTutoria(@PathVariable Long tutoriaId) throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 tutoriaService.deleteTutoria(tutoriaId));

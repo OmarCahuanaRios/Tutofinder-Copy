@@ -20,7 +20,7 @@ public class PagoController {
     PagoService pagoService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/pago/{pagoId}")
+    @GetMapping("/pagos/{pagoId}")
     public BookingResponse<PagoDto> getPagoById(@PathVariable Long pagoId) throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 pagoService.getPagoById(pagoId));
@@ -34,20 +34,20 @@ public class PagoController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/pago")
+    @PostMapping("/pagos")
     public BookingResponse<PagoDto> createPago(@RequestBody @Valid CreatePagoDto createPagoDto)throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 pagoService.createPago(createPagoDto));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/pago/{pagoId}")
+    @PutMapping("/pagos/{pagoId}")
     public BookingResponse<PagoDto> updatePago(@PathVariable Long pagoId,@RequestBody @Valid CreatePagoDto createPagoDto)throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 pagoService.updatePago(createPagoDto,pagoId));
     }
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/pago/{pagoId}")
+    @DeleteMapping("/pagos/{pagoId}")
     public BookingResponse<String> deletePago(@PathVariable Long pagoId) throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 pagoService.deletePago(pagoId));

@@ -25,14 +25,14 @@ public class DocenteController {
     DocenteService docenteService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/docente/{docenteId}")
+    @GetMapping("/docentes/{docenteId}")
     public BookingResponse<DocenteDto> getDocenteById(@PathVariable Long docenteId) throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 docenteService.getDocenteById(docenteId));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/docente/{docenteId}/img")
+    @GetMapping("/docentes/{docenteId}/img")
     public ResponseEntity<?> getFoto(@PathVariable Long docenteId) throws BookingException {
         DocenteDto optionalDocente = docenteService.getDocenteById(docenteId);
         Resource imagen = new ByteArrayResource(optionalDocente.getFoto());
@@ -47,21 +47,21 @@ public class DocenteController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/docente")
+    @PostMapping("/docentes")
     public BookingResponse<DocenteDto> createDocente(@Valid CreateDocenteDto createDocenteDto,@RequestParam MultipartFile archivo)throws BookingException, IOException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 docenteService.createDocente(createDocenteDto,archivo));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/docente/{docenteId}")
+    @PutMapping("/docentes/{docenteId}")
     public BookingResponse<DocenteDto> updateDocente(@Valid CreateDocenteDto createDocenteDto,@PathVariable Long docenteId,@RequestParam MultipartFile archivo)throws BookingException, IOException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 docenteService.updateDocente(createDocenteDto,docenteId,archivo));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/docente/{docenteId}")
+    @DeleteMapping("/docentes/{docenteId}")
     public BookingResponse<String> deleteDocente(@PathVariable Long docenteId)throws BookingException {
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 docenteService.deleteDocente(docenteId));
