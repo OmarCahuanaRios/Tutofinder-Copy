@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class DocenteRepositoryTest {
     @Autowired
     private DocenteRepository underTest;
-    
+
     @Test
     void itShouldGetDocenteById() {
         Long id = 1L;

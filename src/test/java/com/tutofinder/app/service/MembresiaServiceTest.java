@@ -35,7 +35,6 @@ public class MembresiaServiceTest {
     private static final Long DOCENTE_ID = 1L;
     public static final Membresia MEMBRESIA = new Membresia();
 
-
     CreateMembresiaDto CREATE_MEMBRESIA_DTO = new CreateMembresiaDto();
     private static final String MEMBRESIA_DELETED = "INFORME_DELETED";
     private static final Optional<Membresia> OPTIONAL_INFORME_EMPTY = Optional.empty();
