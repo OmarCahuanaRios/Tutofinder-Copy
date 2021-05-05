@@ -53,15 +53,16 @@ public class InformeServiceImpl implements InformeService {
                 .orElseThrow(() -> new NotFoundException("SNOT-404-1","ALUMNO_NOT_FOUND"));
 
         Informe informeEntity = new Informe();
+        Long id;
         informeEntity.setDescripcionInforme(createInformeDto.getDescripcionInforme());
         informeEntity.setTutoria(tutoria);
         informeEntity.setAlumno(alumno);
         try {
-            informeRepository.save(informeEntity);
+            id = informeRepository.save(informeEntity).getId();
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getInformeEntity(informeEntity.getId()),InformeDto.class);
+        return modelMapper.map(getInformeEntity(id),InformeDto.class);
     }
 
     @Override
@@ -71,14 +72,15 @@ public class InformeServiceImpl implements InformeService {
             throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
         }
         Informe informeEntity = informe.get();
+        Long id;
         informeEntity.setDescripcionInforme(createInformeDto.getDescripcionInforme());
         try {
-            informeRepository.save(informeEntity);
+            id = informeRepository.save(informeEntity).getId();
         }
         catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getInformeEntity(informeEntity.getId()),InformeDto.class);
+        return modelMapper.map(getInformeEntity(id),InformeDto.class);
     }
 
     @Override

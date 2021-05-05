@@ -52,14 +52,15 @@ public class ReservaServiceImpl implements ReservaService {
         final Alumno alumno = alumnoRepository.findById(createReservaDto.getAlumnoId()).
                 orElseThrow(()-> new NotFoundException("SNOT-404-1","ALUMNO_NOT_FOUND"));
         Reserva reservaEntity = new Reserva();
+        Long id;
         reservaEntity.setAlumno(alumno);
         reservaEntity.setTutoria(tutoria);
         try {
-            reservaRepository.save(reservaEntity);
+            id = reservaRepository.save(reservaEntity).getId();
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getReservaEntity(reservaEntity.getId()),ReservaDto.class);
+        return modelMapper.map(getReservaEntity(id),ReservaDto.class);
     }
 
     @Override

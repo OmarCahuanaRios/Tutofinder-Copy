@@ -47,17 +47,17 @@ public class TarjetaServiceImpl implements TarjetaService {
     @Transactional
     public TarjetaDto createTarjeta(CreateTarjetaDto createTarjetaDto) throws BookingException {
         Tarjeta tarjetaEntity = new Tarjeta();
-        Long tarjetaId;
+        Long id;
         tarjetaEntity.setNombrePoseedor(createTarjetaDto.getNombrePoseedor());
         tarjetaEntity.setNumeroTarjeta(createTarjetaDto.getNumeroTarjeta());
         tarjetaEntity.setFechaExpiracion(createTarjetaDto.getFechaExpiracion());
 
         try {
-            tarjetaId = tarjetaRepository.save(tarjetaEntity).getId();
+            id = tarjetaRepository.save(tarjetaEntity).getId();
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getTarjetaEntity(tarjetaId),TarjetaDto.class);
+        return modelMapper.map(getTarjetaEntity(id),TarjetaDto.class);
 
     }
 
@@ -69,16 +69,17 @@ public class TarjetaServiceImpl implements TarjetaService {
             throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
         }
         Tarjeta tarjetaEntity = tarjeta.get();
+        Long id;
         tarjetaEntity.setNombrePoseedor(createTarjetaDto.getNombrePoseedor());
         tarjetaEntity.setNumeroTarjeta(createTarjetaDto.getNumeroTarjeta());
         tarjetaEntity.setFechaExpiracion(createTarjetaDto.getFechaExpiracion());
         try {
-            tarjetaRepository.save(tarjetaEntity);
+            id = tarjetaRepository.save(tarjetaEntity).getId();
         }
         catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getTarjetaEntity(tarjetaEntity.getId()),TarjetaDto.class);
+        return modelMapper.map(getTarjetaEntity(id),TarjetaDto.class);
     }
 
     @Override

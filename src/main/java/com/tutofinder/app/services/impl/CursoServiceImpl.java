@@ -49,14 +49,14 @@ public class CursoServiceImpl implements CursoService {
     @Override
     public CursoDto createCurso(CreateCursoDto createCursoDto) throws BookingException {
         Curso cursoEntity = new Curso();
-        Long cursoId;
+        Long id;
         cursoEntity.setNombre(createCursoDto.getNombre());
         try {
-            cursoId = cursoRepository.save(cursoEntity).getId();
+            id = cursoRepository.save(cursoEntity).getId();
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getCursoEntity(cursoId),CursoDto.class);
+        return modelMapper.map(getCursoEntity(id),CursoDto.class);
     }
 
     @Override
@@ -66,14 +66,15 @@ public class CursoServiceImpl implements CursoService {
             throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
         }
         Curso cursoEntity = curso.get();
+        Long id;
         cursoEntity.setNombre(createCursoDto.getNombre());
         try {
-            cursoRepository.save(cursoEntity);
+            id = cursoRepository.save(cursoEntity).getId();
         }
         catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getCursoEntity(cursoEntity.getId()),CursoDto.class);
+        return modelMapper.map(getCursoEntity(id),CursoDto.class);
     }
 
     @Override

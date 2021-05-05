@@ -59,6 +59,7 @@ public class MembresiaServiceImpl implements MembresiaService {
             throw new NotFoundException("MEMBRESIA_EXIST","MEMBRESIA_EXIST");
         }
         Membresia membresiaEntity = new Membresia();
+        Long id;
         membresiaEntity.setDescripcionMembresia(createMembresiaDto.getDescripcionMembresia());
         membresiaEntity.setFechaExpiracion(createMembresiaDto.getFechaExpiracion());
         membresiaEntity.setTarjeta(tarjeta);
@@ -66,11 +67,11 @@ public class MembresiaServiceImpl implements MembresiaService {
         membresiaEntity.setCostoMembresia(createMembresiaDto.getCostoMembresia());
 
         try {
-            membresiaRepository.save(membresiaEntity);
+            id = membresiaRepository.save(membresiaEntity).getId();
         }catch (Exception ex){
             throw  new InternalServerErrorException("INTERNAL_ERROR","INTERNAL_ERROR");
         }
-        return modelMapper.map(getMembresiaEntity(membresiaEntity.getId()),MembresiaDto.class);
+        return modelMapper.map(getMembresiaEntity(id),MembresiaDto.class);
     }
 
     @Override
@@ -87,6 +88,7 @@ public class MembresiaServiceImpl implements MembresiaService {
             throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
         }
         Membresia membresiaEntity = membresia.get();
+        Long id;
         membresiaEntity.setDescripcionMembresia(createMembresiaDto.getDescripcionMembresia());
         membresiaEntity.setFechaExpiracion(createMembresiaDto.getFechaExpiracion());
         membresiaEntity.setTarjeta(tarjeta);
@@ -94,11 +96,11 @@ public class MembresiaServiceImpl implements MembresiaService {
         membresiaEntity.setCostoMembresia(createMembresiaDto.getCostoMembresia());
 
         try {
-            membresiaRepository.save(membresiaEntity);
+            id = membresiaRepository.save(membresiaEntity).getId();
         }catch (Exception ex){
             throw  new InternalServerErrorException("INTERNAL_ERROR","INTERNAL_ERROR");
         }
-        return modelMapper.map(getMembresiaEntity(membresiaEntity.getId()),MembresiaDto.class);
+        return modelMapper.map(getMembresiaEntity(id),MembresiaDto.class);
     }
 
     @Override
