@@ -73,6 +73,28 @@ public class FavoritoRepositoryTest {
 
     }
 
+    @Test
+    void itShouldGetFavoritoById1() {
+        Long id = 1L;
+
+        Docente docente = new Docente();
+
+        Padre padre = new Padre();
+
+        Favorito favorito = new Favorito(id,padre,docente);
+
+        underTest.save(favorito);
+
+        Optional<Favorito> optionalFavorito= underTest.findById(id);
+
+        assertThat(optionalFavorito).isPresent().hasValueSatisfying(
+                c->{
+                    assertThat(c).isEqualTo(favorito);
+                }
+        );
+
+    }
+
 
     @Test
     void itShouldNotSaveFavoritoWhenPadreIsNull() {
