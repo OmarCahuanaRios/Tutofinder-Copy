@@ -3,7 +3,6 @@ package com.tutofinder.app.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,8 +27,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
-import lombok.var;
 
 public class PagoServiceTest {
     private static Long PAGO_ID = 1L;
@@ -115,6 +112,7 @@ public class PagoServiceTest {
 
     @Test
     public void deletePagoTest() throws BookingException {
-
+        Mockito.when(pagoRepository.findById(PAGO_ID)).thenReturn(Optional.of(PAGO));
+        pagoServiceImpl.deletePago(PAGO_ID);
     }
 }
