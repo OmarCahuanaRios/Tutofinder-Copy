@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
+@CrossOrigin({"http://localhost:4200"})
 @RestController
 @RequestMapping(value = "/tutofinder")
 public class ReservaController {
