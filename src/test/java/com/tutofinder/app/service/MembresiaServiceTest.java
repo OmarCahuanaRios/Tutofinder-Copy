@@ -6,7 +6,6 @@ import com.tutofinder.app.entity.Docente;
 import com.tutofinder.app.entity.Membresia;
 import com.tutofinder.app.entity.Tarjeta;
 import com.tutofinder.app.exception.BookingException;
-import com.tutofinder.app.repository.AlumnoRepository;
 import com.tutofinder.app.repository.DocenteRepository;
 import com.tutofinder.app.repository.MembresiaRepository;
 import com.tutofinder.app.repository.TarjetaRepository;

@@ -39,7 +39,7 @@ public class TarjetaRepositoryTest {
 
         assertThat(optionalTarjeta).isPresent().hasValueSatisfying(
                 c->{
-                    assertThat(c).isEqualToComparingFieldByField(tarjeta);
+                    assertThat(c).isEqualTo(tarjeta);
                 }
         );
     }
