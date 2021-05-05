@@ -95,16 +95,13 @@ public class FavoritoRepositoryTest {
 
 
         Docente docente = new Docente(id,nombre,apellido,dni,domicilio,correo,numeroCuenta,costoHora,membresia,foto,tutorias,fecha);
-        underTest2.save(docente);
-
-        Padre padre = new Padre(id,nombre ,apellido,dni,correo,foto,fecha,Alumnos);
-        underTest3.save(padre);
-
-        Optional<Padre> searchPadre = underTest3.findById(padre.getId());
-        Optional<Docente> searchDocente = underTest2.findById(docente.getId());
 
 
-        Favorito favorito = new Favorito(id,null,searchDocente.get());
+
+
+
+
+        Favorito favorito = new Favorito(id,null,docente);
 
 
         assertThatThrownBy(()->underTest.save(favorito))

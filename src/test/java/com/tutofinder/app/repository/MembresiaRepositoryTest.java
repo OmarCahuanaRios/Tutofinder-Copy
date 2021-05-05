@@ -95,14 +95,8 @@ public class MembresiaRepositoryTest {
 
         Docente docente = new Docente(id,"nombre","apelido","jr 28 de agosto 302","12345678","correo@correo.com",
                 "123123123",25.5,true,foto,tutorias,fecha);
-        underTest2.save(docente);
 
-
-
-        Optional<Docente> optionalDocente = underTest2.findById(id);
-        Optional<Tarjeta > optionalTarjeta = underTest3.findById(id);
-
-        Membresia membresiaEntity = new Membresia(id,optionalDocente.get(),null,fechaExpiracion,descripcionMembrecia,costoMembrecia);
+        Membresia membresiaEntity = new Membresia(id,docente,null,fechaExpiracion,descripcionMembrecia,costoMembrecia);
 
         assertThatThrownBy(()->underTest.save(membresiaEntity))
                 .hasMessageContaining("not-null property references a null or transient value : com.tutofinder.app.entity.Membresia.tarjeta")
