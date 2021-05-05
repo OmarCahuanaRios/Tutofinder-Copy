@@ -26,7 +26,6 @@ public class CursoServiceTest {
     private static final Long CURSO_ID = 1L;
     private static final String NOMBRE_CURSO = "JAVA-ADVANCE";
 
-
     public static Curso CURSO = new Curso();
 
     CreateCursoDto CREATE_CURSO_DTO = new CreateCursoDto();

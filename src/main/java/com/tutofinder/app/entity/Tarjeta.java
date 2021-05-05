@@ -30,6 +30,4 @@ public class Tarjeta {
     @NotEmpty(message = "El nombre del poseedor no puede estar vacío")
     @Column(name = "nombre_poseedor", nullable = false)
     private String nombrePoseedor;
-
-
 }

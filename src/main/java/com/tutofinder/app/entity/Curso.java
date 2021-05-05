@@ -20,5 +20,4 @@ public class Curso {
 
     @Column(unique = true, nullable = false)
     private String nombre;
-
 }

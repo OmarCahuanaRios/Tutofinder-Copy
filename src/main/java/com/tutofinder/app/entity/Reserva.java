@@ -35,6 +35,4 @@ public class Reserva {
     public void PrePersist() {
         this.createAt = new Date();
     }
-
-
 }

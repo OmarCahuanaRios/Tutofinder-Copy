@@ -55,5 +55,4 @@ public class Tutoria {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "docente_id",nullable = false)
     private Docente docente;
-
 }

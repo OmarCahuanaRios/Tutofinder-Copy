@@ -14,5 +14,4 @@ public interface DocenteService {
     DocenteDto createDocente(CreateDocenteDto createDocenteDto, MultipartFile archivo) throws BookingException, IOException;
     DocenteDto updateDocente(CreateDocenteDto createDocenteDto, Long docenteId, MultipartFile archivo) throws BookingException, IOException;
     String deleteDocente(Long docenteId) throws BookingException;
-
 }

@@ -31,7 +31,6 @@ public class AlumnoServiceImpl implements AlumnoService {
     @Autowired
     PadreRepository padreRepository;
 
-
     public static ModelMapper modelMapper = new ModelMapper();
 
     @Override

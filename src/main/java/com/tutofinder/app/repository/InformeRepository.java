@@ -10,5 +10,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InformeRepository extends JpaRepository<Informe,Long> {
     Optional<Informe> findById(Long id);
-
 }

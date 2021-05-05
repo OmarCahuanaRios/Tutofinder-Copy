@@ -22,8 +22,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class DocenteRepositoryTest {
     @Autowired
     private DocenteRepository underTest;
-
-
+    
     @Test
     void itShouldGetDocenteById() {
         Long id = 1L;
@@ -38,7 +37,6 @@ public class DocenteRepositoryTest {
         byte[] foto = "Foto".getBytes();
         List tutorias  = new ArrayList<Tutoria>();
         Date fecha = new Date();
-
 
         Docente docente = new Docente(id,nombre,apellido,dni,domicilio,correo,numeroCuenta,costoHora,membresia,foto,tutorias,fecha);
 
