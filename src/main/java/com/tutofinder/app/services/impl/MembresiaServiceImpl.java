@@ -112,7 +112,7 @@ public class MembresiaServiceImpl implements MembresiaService {
         } catch (final Exception e){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
         }
-        return "MEMBRESIA_DELETED";
+        return "INFORME_DELETED";
     }
 
     private Membresia getMembresiaEntity(Long membresiaId) throws BookingException{
