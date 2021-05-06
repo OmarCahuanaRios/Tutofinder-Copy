@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'MAVEN_3_6_3'
+        maven 'MAVEN_3_8_1'
         jdk 'JDK_1_8'
     }
 
@@ -9,7 +9,7 @@ pipeline {
         stage ('Compile Stage') {
 
             steps {
-                withMaven(maven : 'MAVEN_3_6_3') {
+                withMaven(maven : 'MAVEN_3_8_1') {
                     bat 'mvn clean compile'
                 }
             }
@@ -18,7 +18,7 @@ pipeline {
         stage ('Testing Stage') {
 
             steps {
-                withMaven(maven : 'MAVEN_3_6_3') {
+                withMaven(maven : 'MAVEN_3_8_1') {
                     bat 'mvn test'
                 }
             }
@@ -27,7 +27,7 @@ pipeline {
 
         stage ('package Stage') {
             steps {
-                withMaven(maven : 'MAVEN_3_6_3') {
+                withMaven(maven : 'MAVEN_3_8_1') {
                     bat 'mvn package'
                 }
             }
@@ -36,7 +36,7 @@ pipeline {
 		stage('Deploy tomcat') {
             steps {
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL} direcion ${env.WORKSPACE}"
-                withMaven(maven : 'MAVEN_3_6_3') {
+                withMaven(maven : 'MAVEN_3_8_1') {
 					bat '"C:\\Program Files\\Git\\mingw64\\bin\\curl.exe" -T ".\\target\\tutofinder.war" "http://tomcat:tomcat@localhost:9090/manager/text/deploy?path=/tutofinder&update=true"'
                 }
             }
